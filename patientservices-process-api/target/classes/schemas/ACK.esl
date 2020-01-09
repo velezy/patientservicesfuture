@@ -1,0 +1,10 @@
+form: HL7
+version: '2.4'
+imports: [ '/hl7lax/v2_4/basedefs.esl', 'schemas/hssdefs.esl' ]
+id: 'ACK'
+name: 'ACK'
+data: 
+- { idRef: 'MSH', position: '01', usage: O }
+- { idRef: 'MSA', position: '02', usage: O }
+- { idRef: 'ERR', position: '04', usage: O }
+

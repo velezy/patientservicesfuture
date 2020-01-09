@@ -1,0 +1,119 @@
+form: HL7
+version: '2.4'
+segments: 
+- id: 'ZPD'
+  name: 'Additional Patient Information'
+  values:
+  - { idRef: 'ST', name: 'Patient Ancestry', usage: O }
+  - { idRef: 'ST', name: 'Preferred Communication Method', usage: O }
+  - { idRef: 'ST', name: 'Patient Multiple Birth Total', usage: O }
+  - { idRef: 'ST', name: 'Mychart Status', usage: O }
+  - { idRef: 'ST', name: 'Research Study ID', usage: O }
+  - { idRef: 'ST', name: 'Service Area1', usage: O }
+  - { idRef: 'ST', name: 'Service Area2', usage: O }
+  - { idRef: 'ST', name: 'Pregnancy Flag', usage: O }
+  - { idRef: 'ST', name: 'Expected Delivery Date', usage: O }
+  - { idRef: 'ST', name: 'Transplant Flag', usage: O }
+  - { idRef: 'ST', name: 'Filler 10', usage: O }
+  - { idRef: 'ST', name: 'Filler 11', usage: O }
+  - { idRef: 'ST', name: 'Filler 12', usage: O }
+  - { idRef: 'ST', name: 'Filler 13', usage: O }
+  - { idRef: 'ST', name: 'Filler 14', usage: O }
+  - { idRef: 'ST', name: 'Race Ethnicity ID Method', usage: O }
+  - { idRef: 'ST', name: 'Filler 16', usage: O }
+  - { idRef: 'ST', name: 'Filler 17', usage: O }
+  - { idRef: 'ST', name: 'Filler 18', usage: O }
+  - { idRef: 'ST', name: 'Filler 19', usage: O }
+  - { idRef: 'ST', name: 'Gender Identity', usage: O }
+  - { idRef: 'ST', name: 'Filler 20', usage: O }
+  - { idRef: 'ST', name: 'Sex Assigned at Birth', usage: O }
+- id: 'ARV'
+  name: 'Patient Level Access Restrictions'
+  values:
+  - { idRef: 'ST', name: 'Set ID', usage: O }
+  - { idRef: 'ST', name: 'Access Restrictions Actions Code', usage: O }
+  - { idRef: 'ST', name: 'Access Restriction Value', usage: O }
+  - { idRef: 'ST', name: 'Access Restriction Reason', usage: O }
+  - { idRef: 'ST', name: 'Special Access Restriction Instructions', usage: O }
+  - { idRef: 'ST', name: 'Access Restriction Date Range', usage: O }
+- id: 'CON'
+  name: 'Consent'
+  values:
+  - { idRef: 'ST', name: 'Set ID', usage: O }
+  - { idRef: 'ST', name: 'Consent Type', usage: O }
+  - { idRef: 'ST', name: 'Consent Form ID', usage: O }
+  - { idRef: 'ST', name: 'Consent Form Number', usage: O }
+  - { idRef: 'ST', name: 'Consent Text', usage: O }
+  - { idRef: 'ST', name: 'Subject-specific Consent Text', usage: O }
+  - { idRef: 'ST', name: 'Consent Background', usage: O }
+  - { idRef: 'ST', name: 'Subject-specific Context Background', usage: O }
+  - { idRef: 'ST', name: 'Consenter-Imposed limitations', usage: O }
+  - { idRef: 'ST', name: 'Consent Mode', usage: O }
+  - { idRef: 'ST', name: 'Consent Status', usage: O }
+  - { idRef: 'ST', name: 'Consent Discussion Date/Time', usage: O }
+  - { idRef: 'ST', name: 'Consent Decision Date/Time', usage: O }
+  - { idRef: 'ST', name: 'Consent Effective Date/Time', usage: O }
+  - { idRef: 'ST', name: 'Subject Competence Indicator', usage: O }
+  - { idRef: 'ST', name: 'Translator Assistance Indicator', usage: O }
+  - { idRef: 'ST', name: 'Language Translated To', usage: O }
+  - { idRef: 'ST', name: 'Information Material Supplied', usage: O }
+  - { idRef: 'ST', name: 'Consent Bypass Reason', usage: O }
+  - { idRef: 'ST', name: 'Consent Disclosure Level', usage: O }
+  - { idRef: 'ST', name: 'Consent Non-Disclosure Reason', usage: O }
+  - { idRef: 'ST', name: 'Non-subject Consenter Reason', usage: O }
+  - { idRef: 'ST', name: 'Consenter ID', usage: O }
+  - { idRef: 'ST', name: 'Relationship to Subject Table', usage: O }
+- id: 'ZPV'
+  name: 'Patient Visit - Additional Info'
+  values:
+  - { idRef: 'ST', name: 'Clinic Code', usage: O }
+  - { idRef: 'ST', name: 'Client Code', usage: O }
+  - { idRef: 'ST', name: 'Current Flowsheet Values', usage: O }
+  - { idRef: 'ST', name: 'ADT Filter Flag', usage: O }
+  - { idRef: 'ST', name: 'Bed Phone Number', usage: O }
+  - { idRef: 'ST', name: 'LMP', usage: O }
+  - { idRef: 'ST', name: 'Insurance Type', usage: O }
+  - { idRef: 'ST', name: 'Research Study ID', usage: O }
+  - { idRef: 'ST', name: 'Billing Indicator', usage: O }
+  - { idRef: 'ST', name: 'DateTime when first inpatient', usage: O }
+  - { idRef: 'ST', name: 'DateTime first Outpatient visit', usage: O }
+  - { idRef: 'ST', name: 'DateTime first ER visit', usage: O }
+  - { idRef: 'ST', name: 'RTLS Badge ID', usage: O }
+  - { idRef: 'ST', name: 'ED Disposition', usage: O }
+  - { idRef: 'ST', name: 'Bed Type', usage: O }
+  - { idRef: 'ST', name: 'Bed Type Reason', usage: O }
+  - { idRef: 'ST', name: 'Room Type', usage: O }
+  - { idRef: 'ST', name: 'Room Type Reason', usage: O }
+  - { idRef: 'ST', name: 'Accomdation Code Reason', usage: O }
+- id: 'ZIN'
+  name: 'Additional Insurance Information'
+  values:
+  - { idRef: 'ST', name: 'Precertification Agency', usage: O }
+  - { idRef: 'ST', name: 'Bed Days Information', usage: O }
+  - { idRef: 'ST', name: 'Bed Days Next Review Date', usage: O }
+  - { idRef: 'ST', name: 'Total Denied Days', usage: O }
+  - { idRef: 'ST', name: 'Alternative Subscriber Name', usage: O }
+  - { idRef: 'ST', name: 'Alternative Subscriber Date of Birth', usage: O }
+  - { idRef: 'ST', name: 'Insured Relationship to Guarantor', usage: O }
+  - { idRef: 'ST', name: 'Member Relationship to Guarantor', usage: O }
+  - { idRef: 'ST', name: 'Process Control Number', usage: O }
+  - { idRef: 'ST', name: 'RFL ID', usage: O }
+- id: 'PDA'
+  name: 'Patient death and autopsy'
+  values:
+  - { idRef: 'ST', name: 'Death Cause Code', usage: O }
+  - { idRef: 'ST', name: 'Death Location', usage: O }
+  - { idRef: 'ST', name: 'Death Certified Indicator', usage: O }
+  - { idRef: 'ST', name: 'Death Certificate Singed Date/Time', usage: O }
+  - { idRef: 'ST', name: 'Death Certified by', usage: O }
+  - { idRef: 'ST', name: 'Autopsy Indicator', usage: O }
+  - { idRef: 'ST', name: 'Autopsy Start and End Date/Time', usage: O }
+  - { idRef: 'ST', name: 'Autopsy Performed By', usage: O }
+  - { idRef: 'ST', name: 'Coroner Indicator', usage: O }
+- id: 'LAN'
+  name: 'Language Detail'
+  values:
+  - { idRef: 'ST', name: 'Set ID', usage: O }
+  - { idRef: 'ST', name: 'Language Code', usage: O }
+  - { idRef: 'ST', name: 'Language Ability Code', usage: O }
+  - { idRef: 'ST', name: 'Language Proficiency Code', usage: O }

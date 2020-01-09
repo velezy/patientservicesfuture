@@ -1,0 +1,69 @@
+%dw 2.0
+import java!com::hss::utils::Stringify
+output application/java
+var MSH = payload.Data.ADT_A08.MSH
+var PID = payload.Data.ADT_A08.PID
+var ZPD = payload.Data.ADT_A08.ZPD
+var NTE = payload.Data.ADT_A08.NTE
+var PD1  = payload.Data.ADT_A08.PD1
+var ROL = payload.Data.ADT_A08.ROL1
+var IN1 = payload.Data.ADT_A08.INSURANCE
+var Enub = PID."PID-03"."CX-01"[1]
+var PID3 = Stringify::toString(PID."PID-03") //map ($."CX-01" ++ "," ++ $."CX-04"."HD-01" ++ "," ++ $."CX-05")
+var PID5 = Stringify::toString(PID."PID-05") //map ($."XPN-02" ++ "," ++ $."XPN-01" ++ "," ++ $."XPN-03")
+var NK1 = payload.Data.ADT_A08.NK1
+var GT1 = payload.Data.ADT_A08.GT1 map {
+	data: $,
+	index: $$
+}
+var PID10 = Stringify::toString(PID."PID-10")
+var PID11 = Stringify::toString(PID."PID-11")
+var HOME3 = PID."PID-13" map ($."XTN-03")
+var HOME1 = PID."PID-13" map ($."XTN-01")
+var HOME2 = PID."PID-13" map ($."XTN-02")
+var HOME7 = PID."PID-13" map ($."XTN-07")
+var HOME5 = PID."PID-13" map ($."XTN-05")
+var HOME6 = PID."PID-13" map ($."XTN-06")
+var PHONE = ((HOME3 default[]) ++ (HOME1 default[]) ++ (HOME2 default[]) ++ (HOME7 default[]) ++ (HOME5 default[]) ++ (HOME6 default[]))
+var PID13 = Stringify::toString(PID."PID-13")
+var PID15 = PID."PID-15"."CE_0296-01"
+var PID16 = PID."PID-16"."CE_0002-01"
+var PID17 = PID."PID-17"."CE_0006-01"
+var PID19 = PID."PID-19" default "" replace /(\d){3}-(\d){2}/ with "***-**"
+var PD13 = Stringify::toString(PD1."PD1-03")
+var PD14 = Stringify::toString(PD1."PD1-04")
+var PD16 = PD1."PD1-06"
+var ZPD21 = ZPD."ZPD-21"
+var ZPD2 = Stringify::toString(ZPD."ZPD-02")
+var ROLs = Stringify::toString(ROL)
+var NK1s = Stringify::toString(NK1)
+var GT1s = Stringify::toString(GT1)
+var IN1s = Stringify::toString(IN1) default "" replace /(\d){3}-(\d){2}/ with "***-**"
+var NTE4 = Stringify::toString(NTE."NTE-04"."CE_0364-01")
+var PID3_1 = PID."PID-03"."CX-01"[0]
+
+
+
+var addresses = (PID."PID-11" filter $$<5 map(value, index) ->
+	{
+		("HealthCloudGA__Address"++(index+1)++"Line1__c") : value."XAD-01"."SAD-01",
+		("HealthCloudGA__Address"++(index+1)++"Line2__c") : value."XAD-01"."SAD-02" default "",
+		("HealthCloudGA__Address"++(index+1)++"City__c") : value."XAD-03" default "",
+		("HealthCloudGA__Address"++(index+1)++"State__c") : value."XAD-04" default "",
+		("HealthCloudGA__Address"++(index+1)++"PostalCode__c") : value."XAD-05" default "",
+		("HealthCloudGA__Address"++(index+1)++"Country__c") : value."XAD-06" default ""
+
+	}) reduce ((env, obj={}) -> obj ++ env)
+
+var overflowAddresses = 	(PID."PID-11" filter $$ >= 5)
+
+var names = (PID."PID-05" filter $$<3 map(value, index) ->
+	{
+		("HealthCloudGA__FamilyName"++(index+1)++"__c") : value."XPN-01"."FN-01",
+		("HealthCloudGA__GivenName"++(index+1)++"__c") : value."XPN-02" default "",
+		("MiddleName"++(index+1)++"__c") : value."XPN-03" default "",
+		("HealthCloudGA__SuffixName"++(index+1)++"__c") : value."XPN-04" default "",
+		("HealthCloudGA__PrefixName"++(index+1)++"__c") : value."XPN-05" default ""
+	}) reduce ((env, obj={}) -> obj ++ env)
+
+var overflowNames = (PID."PID-05" filter $$ >= 3)

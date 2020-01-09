@@ -1,0 +1,16 @@
+<hl7Message>
+    <messageType>A28</messageType>
+    <messageContent><![CDATA[
+MSH|^~\&|EPIC|HSS|||20191022105725|1916|ADT^A28|229772|T|2.4
+EVN|A28|20191022105725||REG_PAT_NEW|^BENEVENTI^JOSHUA^^^^^^HSS10^^^^^MAINH
+PID|1||5007911^^^MR^MR~E22025^^^EPIC^MRN||ZZTEST^INFECTDIS||19751022|M|||^^^^^US^L||||||||999-99-9999|||||N||||||N
+ZPD||Email~MYCH|||||N||N
+PD1|||HSS MAIN HOSPITAL^^101001
+PV1|1|N
+PV2||||||||||||||||||||||N
+ZPV
+AL1|1|Drug Class|^NO ALLERGY INFORMATION AVAILABLE^
+            ]]>
+            </messageContent>
+    <version>1.0</version>
+</hl7Message>

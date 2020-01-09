@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:hl7="http://www.mulesoft.org/schema/mule/hl7"
+	xmlns:mllp="http://www.mulesoft.org/schema/mule/mllp"
+	xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/mllp http://www.mulesoft.org/schema/mule/mllp/current/mule-mllp.xsd
+http://www.mulesoft.org/schema/mule/hl7 http://www.mulesoft.org/schema/mule/hl7/current/mule-hl7.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="4a400caa-2bf7-4316-80f1-f28c64fb0203" file="hss-env.properties" />
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="7c64dc12-524f-4ce1-9b42-c990e810cd7e" >
+		<salesforce:cached-basic-connection username="${hss.sf.username}" password="${hss.sf.password}" securityToken="${hss.sf.security.token}" url="${hss.authorization.url}" />
+	</salesforce:sfdc-config>
+	<mllp:mllp-listener-config name="HL7_MLLP_Mllp_listener_config" doc:name="HL7 MLLP Mllp listener config" doc:id="25a356f5-eed4-4da8-a629-2f6c91754f59" >
+		<mllp:mllp-listener-connection host="0.0.0.0" port="${hss.mllp.listener.port}" keepAlive="true" />
+	</mllp:mllp-listener-config>
+	<hl7:config name="HL7_EDI_Config" doc:name="HL7 EDI Config" doc:id="516ac8e0-5105-4ec9-af33-e8b3f9db0f0e" eventMessageMap="schemas/event-message.yaml">
+		<hl7:connection />
+		<hl7:schemas >
+			<hl7:schema value="schemas/ADT_A08.esl" />
+			<hl7:schema value="schemas/ADT_A28.esl" />
+			<hl7:schema value="schemas/ADT_A31.esl" />
+			<hl7:schema value="schemas/ACK.esl" />
+		
+</hl7:schemas>
+	</hl7:config>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a89c0e67-ae78-4445-a573-26b5bb7ce2a1" basePath="/api" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+</mule>

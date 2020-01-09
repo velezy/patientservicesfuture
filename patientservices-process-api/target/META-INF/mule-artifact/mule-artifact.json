@@ -1,0 +1,68 @@
+{
+  "configs": [
+    "global.xml",
+    "patientservices-process-api.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:patientservices:1.0.0-SNAPSHOT",
+  "minMuleVersion": "4.2.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [
+        "com.hss.utils"
+      ],
+      "exportedResources": [
+        "log4j2.xml",
+        "global.xml",
+        "patientservices-process-api.xml",
+        "application-types.xml",
+        "schemas/ADT_A01.esl",
+        "schemas/basedefs.esl",
+        "schemas/ADT_A28.esl",
+        "schemas/datatypes.xsd",
+        "schemas/fields-1.xsd",
+        "schemas/ADT_A05.esl",
+        "schemas/event-message.yaml",
+        "schemas/segments-1.xsd",
+        "schemas/segments.xsd",
+        "schemas/hssdefs.esl",
+        "schemas/SIU_S13.esl",
+        "schemas/fields.xsd",
+        "schemas/SIU_S12.esl",
+        "schemas/SIU_S15.esl",
+        "schemas/SIU_S14.esl",
+        "schemas/ADT_A08.esl",
+        "schemas/datatypes-1.xsd",
+        "schemas/structures.txt",
+        "schemas/ACK.esl",
+        "schemas/ADT_A01.xsd",
+        "schemas/ADT_A31.esl",
+        "schemas/ADT_A01-1.xsd",
+        "examples/ADT_A28.esl",
+        "examples/A31_input.json",
+        "examples/inputA08UP.json",
+        "examples/A28_input.json",
+        "examples/ack_output.json",
+        "examples/inputA28UP.json",
+        "examples/err",
+        "examples/hssdefs.esl",
+        "examples/hl7TransfroamtionApi_Sampple_Payload.xml",
+        "examples/inputA31UP.json",
+        "examples/inputA082IN1.json",
+        "examples/ADT_A08.esl",
+        "examples/A08with2IN1.json",
+        "examples/A08_input.json",
+        "examples/ADT_A31.esl",
+        "hss-env.properties",
+        "dw/library.dw"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}

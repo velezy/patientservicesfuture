@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
+	xmlns:xml-module="http://www.mulesoft.org/schema/mule/xml-module"
+	xmlns:hl7="http://www.mulesoft.org/schema/mule/hl7" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:mllp="http://www.mulesoft.org/schema/mule/mllp" xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/mllp http://www.mulesoft.org/schema/mule/mllp/current/mule-mllp.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/hl7 http://www.mulesoft.org/schema/mule/hl7/current/mule-hl7.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+	
+	<validation:config name="Validation_Config" doc:name="Validation Config" doc:id="70b6dd22-18cb-47b4-9373-b83ebea7ba3a" />
+	<http:request-config name="HL7_HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="e193fbf4-f69c-475c-8d24-a43302bfdf13" >
+		<http:request-connection host="${hss.hl7transformation.host}" port="${hss.hl7transformation.port}" />
+	</http:request-config>
+	<vm:config name="VM_Or_AnypointMQ_PlaceHolder" doc:name="VM Config" doc:id="cac99a96-e96f-4826-b6e4-881d57251706">
+		<vm:connection />
+		<vm:queues >
+			<vm:queue queueName="${hss.queue.name}" />
+			
+		</vm:queues>
+	</vm:config>
+	<flow name="hl7-receive" doc:id="1920d9ce-ad4d-4227-95ed-198582f97a1c" >
+		<mllp:mllp-listener doc:name="Mllp listener" doc:id="1f20b3d2-7d28-4b04-9e2d-b73b215a4a94" config-ref="HL7_MLLP_Mllp_listener_config"/>
+		<set-variable value="#[payload]" doc:name="Set Original Payload to a Variable" doc:id="329846df-bbff-4702-a680-551e4841abac" variableName="originalPayload" />
+		<http:request method="GET" doc:name="Call to HL7 Transforamtion Api" doc:id="bb9a4290-7667-4c3e-908a-87ef86796b81" config-ref="HL7_HTTP_Request_configuration" path="${hss.hl7transformation.path}"/>
+		<logger level="INFO" doc:name="Logger" doc:id="feeed0f8-9ae3-47fb-acfb-1141a78bd681" message="payload belfore publishing to queue #[payload]"/>
+		<vm:publish doc:name="Store Messages into Queue  (AnypointMQ or VM )" doc:id="1546e65d-bd2e-4a58-98ce-f0630857b0b6" config-ref="VM_Or_AnypointMQ_PlaceHolder" sendCorrelationId="ALWAYS" queueName="${hss.queue.name}"/>
+		<flow-ref doc:name="Salesforce Upsert Flow" doc:id="40a14274-07bf-44a5-8220-9a72c09888f5" name="CL-HL7Receive-impl-flow"/>
+		<flow-ref doc:name="prepare-sucess-response-sub-flow-ref" doc:id="b1cf2832-4b42-484a-8255-610c49ef4f4d" name="prepare-sucess-response-sub-flow"/>
+		<logger level="INFO" doc:name="Log ACK message" doc:id="f05fae6c-f906-48e1-93e9-08b36037d09a" message="#['Log success ACK' ++ write(payload, &quot;application/json&quot;)]" />
+		<hl7:write doc:name="Acknowledge" doc:id="690d8dec-217d-4f42-9053-10af050400e9" config-ref="HL7_EDI_Config">
+		</hl7:write>
+		<error-handler >
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="207523f5-f494-4c35-a743-bc03dfc26201" type="ANY">
+				<logger level="INFO" doc:name="Start Error Log" doc:id="d7edd41c-b39b-437f-a686-66ea6623734e" message="#['Encountered error ' ++ error.detailedDescription]"/>
+				<ee:transform doc:name="Transform Error Message" doc:id="8b215b04-5d96-4143-a8d9-bc1373b9fd79" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"errorDescription": error.description,
+	"errorDetailedDescription": error.detailedDescription,
+	"errorType": error.errorType,
+	"errorMessage": error.errorMessage,
+	"errorRootCause": error.exception.cause.exceptionMessage
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<logger level="INFO" doc:name="Log Error" doc:id="ce95f56d-e94e-46ce-b0f7-2867e25f33f9" message="#['Error response ' ++ write(payload, &quot;application/json&quot;)]" />
+				<flow-ref doc:name="prepare-failure-response-sub-flow-ref" doc:id="5d40679e-39f5-457a-8720-97956762fe47" name="prepare-failure-response-sub-flow"/>
+				<logger level="INFO" doc:name="Log ACK message" doc:id="a832fa25-8420-4d84-80a8-8d4571c230bf" message="#['Log failure ACK' ++ write(payload, &quot;application/json&quot;)]"/>
+				<hl7:write doc:name="Acknowledge" doc:id="5d0769d5-3d44-4203-8554-09aecf4b03ff" config-ref="HL7_EDI_Config"/>
+			</on-error-continue>
+		</error-handler>
+	</flow>
+	<flow name="http-receive" doc:id="1c3574a4-e709-4965-8826-7612acee839b" >
+		<http:listener doc:name="Listener" doc:id="09a72aa4-4a46-4a3d-9b05-b54292be97e6" config-ref="HTTP_Listener_config" path="/hl7" allowedMethods="POST" outputMimeType="application/json"/>
+		<set-variable value="#[payload]" doc:name="Set Original Payload to a Variable" doc:id="84c16652-14b7-46ad-b328-bb1a90761dc6" variableName="originalPayload"/>
+		<flow-ref doc:name="CL-HL7Receive-impl-flow-ref" doc:id="6f9534bb-dd3d-44f1-b3fd-f0a55280a608" name="CL-HL7Receive-impl-flow"/>
+		<flow-ref doc:name="prepare-sucess-response-sub-flow-ref" doc:id="56a5f99d-f90b-4b00-a3ff-3a0b36cba137" name="prepare-sucess-response-sub-flow"/>
+		<error-handler >
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="fe5117f4-26a5-4b5f-9c35-0ea64e817c07" type="ANY">
+				<logger level="INFO" doc:name="Start Error Log" doc:id="8d63219c-2f01-42d0-8d5b-8e8875028d1b" message="#['Encountered error ' ++ error.detailedDescription]" />
+				<ee:transform doc:name="Transform Error Message" doc:id="ca110afb-b87b-4dad-982f-0b7d6acd53f8" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"errorDescription": error.description,
+	"errorDetailedDescription": error.detailedDescription,
+	"errorType": error.errorType,
+	"errorMessage": error.errorMessage,
+	"errorRootCause": error.exception.cause.exceptionMessage
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<logger level="INFO" doc:name="Log Error" doc:id="32b65161-fef8-4545-b162-2a905d5b7a77" message="#['Error response ' ++ write(payload, 'application/json')]" />
+				<flow-ref doc:name="prepare-failure-response-sub-flow-ref" doc:id="2e4bec1e-3f0e-42ca-a093-3a20c99c5d8a" name="prepare-failure-response-sub-flow" />
+				<logger level="INFO" doc:name="Log ACK message" doc:id="8a99823b-2b00-43f3-9c44-f9f2b40e9143" message="#['Log failure ACK' ++ write(payload, 'application/json')]" />
+			</on-error-continue>
+		</error-handler>
+	</flow>
+	<sub-flow name="prepare-sucess-response-sub-flow" doc:id="40726ae9-8088-4aeb-818d-ff38f69371d4" >
+		<ee:transform doc:name="Prepare Success Response" doc:id="d2426c2f-4b55-4d6f-81dd-0bbba7b50455">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+var MSAVar = vars.originalPayload.ACK.MSA - "MSA-01" ++ {"MSA-01": "AA"}
+---
+{
+	Name: "ACK",
+	MSH: vars.originalPayload.ACK.MSH,
+	Id: "ACK",
+	Data: {
+		ACK: vars.originalPayload.ACK - "ERR" - "MSA" ++ {"MSA" : MSAVar}
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+	<sub-flow name="prepare-failure-response-sub-flow" doc:id="01b8e993-75ae-40a3-bd06-94f34a83e896" >
+		<ee:transform doc:name="Prepare Failure Response" doc:id="e051064a-c594-43c5-ba20-8e924f9c7dd7" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+var MSAVar = vars.originalPayload.ACK.MSA - "MSA-01" ++ {"MSA-01": "AR"}
+var ERRVar = 
+	{
+		"ERR-01": [
+            {
+              "ELD-04": {
+                "CE-01": "",
+                "CE-02": error.detailedDescription,
+                "CE-03": "",
+                "CE-04": "",
+                "CE-05": "",
+                "CE-06": ""
+              }
+            }
+          ]
+	}
+
+---
+{
+	Name: "ACK",
+	MSH: vars.originalPayload.ACK.MSH,
+	Id: "ACK",
+	Data: {
+		ACK: vars.originalPayload.ACK - "ERR" - "MSA"  ++ {"MSA" : MSAVar} ++ {"ERR" : ERRVar}
+	}
+}
+
+
+
+
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</sub-flow>
+	<sub-flow name="CL-HL7Receive-impl-flow" doc:id="cfd5e249-527f-47de-8fc4-572d7ce33dde" >
+		<vm:consume doc:name="Read Messages from Queue(AnypointMQ or VM)" doc:id="e84aebe9-cb0f-40db-a59e-a012a2fda631" config-ref="VM_Or_AnypointMQ_PlaceHolder" queueName="${hss.queue.name}"/>
+		<logger level="DEBUG" doc:name="PreUpsert" doc:id="91454d13-d800-40a3-a264-0d1765b21ecf" message="Start of PreUpsert" />
+		<salesforce:upsert type="HealthCloudGA__EhrPatient__c" doc:name="Upsert" doc:id="beab272a-0f63-4ae0-8cec-ce9c6275fa81" config-ref="Salesforce_Config" externalIdFieldName="HealthCloudGA__SourceSystemId__c" />
+		<logger level="DEBUG" doc:name="PostUpsert" doc:id="1f96eed4-8d7d-48f3-9a7b-a6a671f8213b" />
+		<ee:transform doc:name="Transform Message" doc:id="89288e5b-d8a3-4e06-af11-7a2f7b43032e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Log SF Payload" doc:id="fce3597f-657e-4c5b-8396-573856291773" message="#['SF response' ++ write(payload, &quot;application/json&quot;)]"/>
+		<validation:is-true doc:name="Check if SF response is a success" doc:id="c7630dac-11df-4199-b13d-e63a0d25b4de" message="#['Invalid response returned from SalesForce ' ++ write (payload, 'application/json')]" expression="#[payload[0].success == true]" config-ref="Validation_Config"/>
+		<ee:transform doc:name="Transform Message" doc:id="39d9d3be-fa88-4bd2-98b9-da0ae8d41382" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="End Log" doc:id="6d0bbf22-d104-4bb3-b680-8dbf10d8c6ae" message="Completed processing events from EPIC" />
+	</sub-flow>
+</mule>

@@ -1,0 +1,28 @@
+%dw 2.0
+output application/json
+var MSAVar = vars.originalPayload.ACK.MSA - "MSA-01" ++ {"MSA-01": "AE"}
+var ERRVar = [
+	{
+		"ERR-01": [
+            {
+              "ELD-04": {
+                "CE-01": "",
+                "CE-02": error.detailedDescription,
+                "CE-03": "",
+                "CE-04": "",
+                "CE-05": "",
+                "CE-06": ""
+              }
+            }
+          ]
+	}
+]
+---
+{
+	Name: "ACK",
+	MSH: vars.originalPayload.ACK.MSH,
+	Id: "ACK",
+	Data: {
+		ACK: vars.originalPayload.ACK - "ERR" - "MSA"  ++ {"ERR" : ERRVar} ++ {"MSA" : MSAVar}
+	}
+}

@@ -1,0 +1,37 @@
+{
+  "sampleData": {
+    "2c448860-860b-4353-a256-5efb3a55e112": {
+      "payload": "sample_data/ADT_A01_1.xml"
+    },
+    "5a4fd574-b118-4dce-b74f-47ded62f5dae": {
+      "payload": "sample_data/unknown.dwl"
+    },
+    "94642804-e63c-45c5-bc18-3d9336406138": {
+      "payload": "sample_data/unknown.dwl"
+    },
+    "92acb8d0-caad-4ebc-9bb3-28ef6c84caac": {
+      "payload": "sample_data/unknown_2.dwl"
+    },
+    "bee33a64-855c-4701-a2c8-7e34da626c3e": {
+      "payload": "sample_data/unknown_3.dwl"
+    },
+    "23ba893c-d801-4a56-a9f6-48709d42ff74": {
+      "payload": "sample_data/json_3.json"
+    },
+    "7dce5bad-6baf-42cd-ae98-9fdd653063de": {
+      "payload": "sample_data/json_4.json"
+    },
+    "b99ebd36-b5fc-4536-a033-423fcc14eccd": {
+      "payload": "sample_data/json_5.json"
+    },
+    "11532bdc-6f37-40d2-bfcf-c9304580194d": {
+      "payload": "sample_data/json_6.json"
+    },
+    "71ee7494-16b8-454b-a1c1-b1c291715154": {
+      "payload": "sample_data/json_7.json"
+    },
+    "f359c82e-dd5b-45e2-8015-b7f33c0a0cf5": {
+      "payload": "sample_data/json_8.json"
+    }
+  }
+}

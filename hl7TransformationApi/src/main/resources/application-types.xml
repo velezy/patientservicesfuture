@@ -1,0 +1,710 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="A08" format="json">
+      <types:shape format="weave" example="examples/inputA082IN1.json"><![CDATA[%dw 2.0
+
+type A08 = {|
+  Delimiters: String, 
+  Errors: Array<{|    errorType: {|  |},     errorCode: String,     fatal: Boolean,     errorText: String,     segment: Number {"typeId": "int"}  |}>, 
+  MSH: {|
+    "MSH-10": String, 
+    "MSH-11": {| "PT-01": String |}, 
+    "MSH-12": {| "VID-01": String |}, 
+    "MSH-03": {| "HD-01": String |}, 
+    "MSH-04": {| "HD-01": String |}, 
+    "MSH-07": {| "TS-01": String |}, 
+    "MSH-08": String, 
+    "MSH-09": {|
+      "MSG-02": String, 
+      "MSG-01": String
+    |}
+  |}, 
+  ACK: {|
+    MSH: {|
+      "MSH-10": String, 
+      "MSH-11": {| "PT-01": String |}, 
+      "MSH-12": {| "VID-01": String |}, 
+      "MSH-03": {| "HD-01": String |}, 
+      "MSH-04": {| "HD-01": String |}, 
+      "MSH-05": {| "HD-01": String |}, 
+      "MSH-06": {| "HD-01": String |}, 
+      "MSH-07": {| "TS-01": String |}, 
+      "MSH-08": String, 
+      "MSH-09": {|
+        "MSG-03": String, 
+        "MSG-02": String, 
+        "MSG-01": String
+      |}
+    |}, 
+    ERR: Array<{|      "ERR-01": Array<{|        "ELD-04": {|          "CE-01": String,           "CE-02": String,           "CE-03": String        |},         "ELD-01": String,         "ELD-02": Number {"typeId": "int"}      |}>
+    |}>, 
+    MSA: {|
+      "MSA-02": String, 
+      "MSA-01": String
+    |}
+  |}, 
+  Data: {|
+    ADT_A08: {|
+      UB2: {| "UB2-01": String |}, 
+      UB1: {|
+        "UB1-18": String, 
+        "UB1-19": String, 
+        "UB1-14": String, 
+        "UB1-15": String, 
+        "UB1-01": String
+      |}, 
+      INSURANCE: Array<{|        IN2: {|          "IN2-63": Array<{|            "XTN-01": String,             "XTN-07": String,             "XTN-06": String          |}>, 
+          "IN2-31": String, 
+          "IN2-32": Array<String>, 
+          "IN2-61": {| "CX-01": String |}, 
+          "IN2-37": String, 
+          "IN2-48": String, 
+          "IN2-05": Array<String>, 
+          "IN2-27": String, 
+          "IN2-17": String, 
+          "IN2-28": Array<{| "RMC-01": String |}>, 
+          "IN2-29": Array<{| "PTA-01": String |}>, 
+          "IN2-44": String, 
+          "IN2-55": String, 
+          "IN2-45": String, 
+          "IN2-56": Array<String>, 
+          "IN2-02": String, 
+          "IN2-35": String, 
+          "IN2-57": String
+        |}, 
+        IN1: {|
+          "IN1-31": String, 
+          "IN1-42": {| "CE_0066-01": String |}, 
+          "IN1-02": {|
+            "CE_0072-01": String, 
+            "CE_0072-02": String
+          |}, 
+          "IN1-35": String, 
+          "IN1-01": String, 
+          "IN1-12": String, 
+          "IN1-22": String, 
+          "IN1-44": Array<{| "XAD-06": String |}>, 
+          "IN1-43": String, 
+          "IN1-17": {| "CE_0063-01": String |}, 
+          "IN1-05": Array<{|            "XAD-04": String,             "XAD-05": String,             "XAD-03": String,             "XAD-01": {| "SAD-01": String |}          |}>, 
+          "IN1-16": Array<{|            "XPN-02": String,             "XPN-01": {| "FN-01": String |},             "XPN-03": String          |}>, 
+          "IN1-04": Array<{| "XON-01": String |}>, 
+          "IN1-26": String, 
+          "IN1-03": Array<{| "CX-01": String |}>, 
+          "IN1-25": String, 
+          "IN1-36": String, 
+          "IN1-47": String, 
+          "IN1-19": Array<{|            "XAD-09": String,             "XAD-06": String,             "XAD-04": String,             "XAD-05": String,             "XAD-03": String,             "XAD-01": {| "SAD-01": String |}          |}>, 
+          "IN1-18": {| "TS-01": String |}
+        |}, 
+        ZIN: {|
+          "ZIN-10": String, 
+          "ZIN-07": String, 
+          "ZIN-08": String, 
+          "ZIN-09": String
+        |}, 
+        ROL: {|
+          "ROL-10": {| "CE_0406-01": String |}, 
+          "ROL-01": {| "EI-01": String |}, 
+          "ROL-12": Array<{|            "XTN-03": String,             "XTN-01": String,             "XTN-07": String,             "XTN-06": String          |}>, 
+          "ROL-11": Array<{|            "XAD-06": String,             "XAD-04": String,             "XAD-05": String,             "XAD-03": String,             "XAD-01": {| "SAD-01": String |}          |}>, 
+          "ROL-03": {| "CE_0443-01": String |}, 
+          "ROL-02": String, 
+          "ROL-05": {| "TS-01": String |}, 
+          "ROL-04": Array<{|            "XCN-04": String,             "XCN-02": {| "FN-01": String |},             "XCN-03": String,             "XCN-01": String          |}>
+        |}
+      |}>, 
+      ZPD: {|
+        "ZPD-09": String, 
+        "ZPD-21": String, 
+        "ZPD-20": String, 
+        "ZPD-04": String, 
+        "ZPD-02": String, 
+        "ZPD-07": String
+      |}, 
+      DG1: Array<{|        "DG1-02": String,         "DG1-01": String,         "DG1-04": String,         "DG1-03": {|          "CE_0051-03": String,           "CE_0051-02": String,           "CE_0051-01": String        |},         "DG1-05": {| "TS-01": String |}      |}>, 
+      ROLE: Array<{|        ROL: Array<{|          "ROL-10": {| "CE_0406-01": String |},           "ROL-01": {| "EI-01": String |},           "ROL-12": Array<{|            "XTN-03": String,             "XTN-01": String,             "XTN-07": String,             "XTN-06": String          |}>, 
+          "ROL-11": Array<{|            "XAD-06": String,             "XAD-04": String,             "XAD-05": String,             "XAD-03": String,             "XAD-01": {| "SAD-01": String |}          |}>, 
+          "ROL-03": {| "CE_0443-01": String |}, 
+          "ROL-02": String, 
+          "ROL-05": {| "TS-01": String |}, 
+          "ROL-04": Array<{|            "XCN-04": String,             "XCN-02": {| "FN-01": String |},             "XCN-03": String,             "XCN-01": String          |}>
+        |}>
+      |}>, 
+      NK1: Array<{|        "NK1-07": {| "CE_0131-01": String |},         "NK1-02": Array<{|          "XPN-02": String,           "XPN-01": {| "FN-01": String |}        |}>, 
+        "NK1-01": String, 
+        "NK1-04": Array<{| "XAD-06": String |}>, 
+        "NK1-03": {| "CE_0063-01": String |}, 
+        "NK1-05": Array<{|          "XTN-03": String,           "XTN-01": String,           "XTN-07": String,           "XTN-06": String        |}>
+      |}>, 
+      ZPV: Array<{| "ZPV-11": String |}>, 
+      ACC: {|
+        "ACC-10": String, 
+        "ACC-01": {| "TS-01": String |}, 
+        "ACC-06": String, 
+        "ACC-05": String
+      |}, 
+      MSH: {|
+        "MSH-10": String, 
+        "MSH-11": {| "PT-01": String |}, 
+        "MSH-12": {| "VID-01": String |}, 
+        "MSH-03": {| "HD-01": String |}, 
+        "MSH-04": {| "HD-01": String |}, 
+        "MSH-07": {| "TS-01": String |}, 
+        "MSH-08": String, 
+        "MSH-09": {|
+          "MSG-02": String, 
+          "MSG-01": String
+        |}
+      |}, 
+      CON: Array<{|        "CON-11": String,         "CON-01": String,         "CON-02": String,         "CON-13": String,         "CON-15": String,         "CON-03": String      |}>, 
+      PROCEDURE: Array<{|        PR1: {|          "PR1-01": String,           "PR1-06": String,           "PR1-17": String,           "PR1-18": Array<{| "CE_0417-01": String |}>, 
+          "PR1-05": {| "TS-01": String |}, 
+          "PR1-14": String
+        |}, 
+        ROL: Array<{|          "ROL-10": {| "CE_0406-01": String |},           "ROL-01": {| "EI-01": String |},           "ROL-12": Array<{|            "XTN-03": String,             "XTN-01": String,             "XTN-07": String,             "XTN-06": String          |}>, 
+          "ROL-11": Array<{|            "XAD-06": String,             "XAD-04": String,             "XAD-05": String,             "XAD-03": String,             "XAD-01": {| "SAD-01": String |}          |}>, 
+          "ROL-03": {| "CE_0443-01": String |}, 
+          "ROL-02": String, 
+          "ROL-05": {| "TS-01": String |}, 
+          "ROL-04": Array<{|            "XCN-04": String,             "XCN-02": {| "FN-01": String |},             "XCN-03": String,             "XCN-01": String          |}>
+        |}>
+      |}>, 
+      OBX: Array<{|        "OBX-01": String,         "OBX-12": {| "TS-01": String |},         "OBX-11": String,         "OBX-03": {|          "CE-01": String,           "CE-02": String        |},         "OBX-14": {| "TS-01": String |},         "OBX-02": String,         "OBX-05": Array<{| "OBX-05": String |}>, 
+        "OBX-06": {| "CE-01": String |}, 
+        "OBX-08": String, 
+        "OBX-19": {| "TS-01": String |}, 
+        "OBX-10": String
+      |}>, 
+      GT1: Array<{|        "GT1-05": Array<{|          "XAD-09": String,           "XAD-06": String,           "XAD-04": String,           "XAD-05": String,           "XAD-03": String,           "XAD-01": {| "SAD-01": String |}        |}>, 
+        "GT1-06": Array<{|          "XTN-01": String,           "XTN-07": String,           "XTN-06": String        |}>, 
+        "GT1-17": Array<{| "XAD-06": String |}>, 
+        "GT1-03": Array<{|          "XPN-02": String,           "XPN-01": {| "FN-01": String |}        |}>, 
+        "GT1-01": String, 
+        "GT1-12": String, 
+        "GT1-02": Array<{| "CX-01": String |}>, 
+        "GT1-10": String, 
+        "GT1-11": {| "CE_0063-01": String |}, 
+        "GT1-20": String, 
+        "GT1-09": String, 
+        "GT1-08": {| "TS-01": String |}
+      |}>, 
+      AL1: Array<{|        "AL1-02": {| "CE_0127-01": String |},         "AL1-04": {| "CE_0128-01": String |},         "AL1-06": String      |}>, 
+      PID: {|
+        "PID-05": Array<{|          "XPN-06": String,           "XPN-05": String,           "XPN-07": String,           "XPN-02": String,           "XPN-01": {| "FN-01": String |},           "XPN-04": String,           "XPN-03": String        |}>, 
+        "PID-16": {| "CE_0002-01": String |}, 
+        "PID-15": {| "CE_0296-01": String |}, 
+        "PID-03": Array<{|          "CX-01": String,           "CX-04": {| "HD-01": String |},           "CX-05": String        |}>, 
+        "PID-14": Array<{|          "XTN-03": String,           "XTN-04": String,           "XTN-01": String,           "XTN-02": String,           "XTN-09": String,           "XTN-07": String,           "XTN-08": String,           "XTN-05": String,           "XTN-06": String        |}>, 
+        "PID-13": Array<{|          "XTN-03": String,           "XTN-04": String,           "XTN-01": String,           "XTN-02": String,           "XTN-09": String,           "XTN-07": String,           "XTN-08": String,           "XTN-05": String,           "XTN-06": String        |}>, 
+        "PID-24": String, 
+        "PID-01": String, 
+        "PID-12": String, 
+        "PID-11": Array<{|          "XAD-09": String,           "XAD-06": String,           "XAD-07": String,           "XAD-04": String,           "XAD-05": String,           "XAD-03": String,           "XAD-11": String,           "XAD-01": {| "SAD-01": String |},           "XAD-12": {| "DR-01": {| "TS-01": String |} |}        |}>, 
+        "PID-22": Array<{| "CE_0189-01": String |}>, 
+        "PID-10": Array<{| "CE_0005-01": String |}>, 
+        "PID-08": String, 
+        "PID-19": String, 
+        "PID-07": {| "TS-01": String |}, 
+        "PID-18": {| "CX-01": String |}, 
+        "PID-17": {| "CE_0006-01": String |}, 
+        "PID-30": String
+      |}, 
+      PV1: {|
+        "PV1-41": String, 
+        "PV1-50": {| "CX-01": String |}, 
+        "PV1-04": String, 
+        "PV1-02": String, 
+        "PV1-03": {|
+          "PL-01": String, 
+          "PL-02": String, 
+          "PL-05": String, 
+          "PL-03": String, 
+          "PL-04": {| "HD-01": String |}
+        |}, 
+        "PV1-14": String, 
+        "PV1-47": String, 
+        "PV1-44": {| "TS-01": String |}, 
+        "PV1-01": String, 
+        "PV1-20": Array<{| "FC-01": String |}>, 
+        "PV1-10": String, 
+        "PV1-08": Array<{|          "XCN-04": String,           "XCN-02": {| "FN-01": String |},           "XCN-03": String,           "XCN-01": String        |}>, 
+        "PV1-19": {| "CX-01": String |}, 
+        "PV1-17": Array<{|          "XCN-04": String,           "XCN-02": {| "FN-01": String |},           "XCN-03": String,           "XCN-01": String        |}>, 
+        "PV1-07": Array<{|          "XCN-04": String,           "XCN-02": {| "FN-01": String |},           "XCN-03": String,           "XCN-01": String        |}>
+      |}, 
+      PV2: {|
+        "PV2-02": {| "CE_0129-01": String |}, 
+        "PV2-12": String, 
+        "PV2-22": String, 
+        "PV2-21": String, 
+        "PV2-32": String, 
+        "PV2-08": {| "TS-01": String |}
+      |}, 
+      ROL: Array<{|        "ROL-10": {| "CE_0406-01": String |},         "ROL-01": {| "EI-01": String |},         "ROL-12": Array<{|          "XTN-03": String,           "XTN-01": String,           "XTN-07": String,           "XTN-06": String        |}>, 
+        "ROL-11": Array<{|          "XAD-06": String,           "XAD-04": String,           "XAD-05": String,           "XAD-03": String,           "XAD-01": {| "SAD-01": String |}        |}>, 
+        "ROL-03": {| "CE_0443-01": String |}, 
+        "ROL-02": String, 
+        "ROL-05": {| "TS-01": String |}, 
+        "ROL-04": Array<{|          "XCN-04": String,           "XCN-02": {| "FN-01": String |},           "XCN-03": String,           "XCN-01": String        |}>, 
+        "ROL-06": {| "TS-01": String |}, 
+        "ROL-09": Array<{| "CE-01": String |}>
+      |}>, 
+      DB1: Array<{|        "DB1-08": String,         "DB1-06": String,         "DB1-07": String,         "DB1-01": String,         "DB1-04": String,         "DB1-05": String,         "DB1-02": String      |}>, 
+      NTE1: Array<{|        "NTE-01": String,         "NTE-02": String,         "NTE-04": {| "CE_0364-01": String |}      |}>, 
+      LAN: {|
+        "LAN-04": String, 
+        "LAN-01": String, 
+        "LAN-02": String, 
+        "LAN-03": String
+      |}, 
+      DRG: {|
+        "DRG-08": String, 
+        "DRG-05": {| "CE_0083-01": String |}, 
+        "DRG-02": {| "TS-01": String |}, 
+        "DRG-03": String, 
+        "DRG-11": String, 
+        "DRG-10": String
+      |}, 
+      EVN: {|
+        "EVN-04": String, 
+        "EVN-05": Array<{|          "XCN-02": {| "FN-01": String |},           "XCN-03": String,           "XCN-14": {| "HD-01": String |},           "XCN-09": {| "HD-01": String |}        |}>, 
+        "EVN-02": {| "TS-01": String |}, 
+        "EVN-01": String
+      |}, 
+      PD1: {|
+        "PD1-01": Array<String>, 
+        "PD1-02": String, 
+        "PD1-03": Array<{|          "XON-01": String,           "XON-03": String        |}>, 
+        "PD1-04": Array<{|          "XCN-04": String,           "XCN-02": {| "FN-01": String |},           "XCN-03": String,           "XCN-01": String        |}>, 
+        "PD1-06": String
+      |}, 
+      NTE: Array<{|        "NTE-01": String,         "NTE-02": String,         "NTE-04": {| "CE_0364-01": String |}      |}>
+    |}
+  |}, 
+  Id: String, 
+  Name: String
+|} {"example": "{\"Delimiters\":\"|^~\\\\&\",\"Errors\":[{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"segment out of order\",\"segment\":28},{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"segment out of order\",\"segment\":29},{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"segment out of order\",\"segment\":30}],\"MSH\":{\"MSH-10\":\"225971\",\"MSH-11\":{\"PT-01\":\"T\"},\"MSH-12\":{\"VID-01\":\"2.4\"},\"MSH-03\":{\"HD-01\":\"EPIC\"},\"MSH-04\":{\"HD-01\":\"HSS\"},\"MSH-07\":{\"TS-01\":\"20190716085715\"},\"MSH-08\":\"ORTMD\",\"MSH-09\":{\"MSG-02\":\"A08\",\"MSG-01\":\"ADT\"}},\"ACK\":{\"MSH\":{\"MSH-10\":\"225971\",\"MSH-11\":{\"PT-01\":\"T\"},\"MSH-12\":{\"VID-01\":\"2.4\"},\"MSH-03\":{\"HD-01\":\"EPIC\"},\"MSH-04\":{\"HD-01\":\"HSS\"},\"MSH-05\":{\"HD-01\":\"EPIC\"},\"MSH-06\":{\"HD-01\":\"HSS\"},\"MSH-07\":{\"TS-01\":\"20190716085715\"},\"MSH-08\":\"ORTMD\",\"MSH-09\":{\"MSG-03\":\"ACK\",\"MSG-02\":\"A08\",\"MSG-01\":\"ACK\"}},\"ERR\":[{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"CON\",\"ELD-02\":28}]},{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"CON\",\"ELD-02\":29}]},{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"CON\",\"ELD-02\":30}]}],\"MSA\":{\"MSA-02\":\"225971\",\"MSA-01\":\"AE\"}},\"Data\":{\"ADT_A08\":{\"UB2\":{\"UB2-01\":\"1\"},\"UB1\":{\"UB1-18\":\"20190816010416\",\"UB1-19\":\"20190809010422\",\"UB1-14\":\"20190816010411\",\"UB1-15\":\"20190816010413\",\"UB1-01\":\"1\"},\"INSURANCE\":[{\"IN2\":{\"IN2-63\":[{\"XTN-01\":\"(347)587-6558\",\"XTN-07\":\"5876558\",\"XTN-06\":\"347\"}],\"IN2-31\":\"M\",\"IN2-32\":[\"A2\"],\"IN2-61\":{\"CX-01\":\"3YH3VY3PK92\"},\"IN2-37\":\"N\",\"IN2-48\":\"T\",\"IN2-05\":[\"Payor Plan\"],\"IN2-27\":\"1\",\"IN2-17\":\"20190820131649\",\"IN2-28\":[{\"RMC-01\":\"2PRI\"}],\"IN2-29\":[{\"PTA-01\":\"2ANC\"}],\"IN2-44\":\"20190826131630\",\"IN2-55\":\"20190826131637\",\"IN2-45\":\"20190826131633\",\"IN2-56\":[\"20190826131639\"],\"IN2-02\":\"999-99-9999\",\"IN2-35\":\"F\",\"IN2-57\":\"1\"},\"IN1\":{\"IN1-31\":\"S\",\"IN1-42\":{\"CE_0066-01\":\"1\"},\"IN1-02\":{\"CE_0072-01\":\"108100\",\"CE_0072-02\":\"MEDICARE PART A AND B\"},\"IN1-35\":\"601222\",\"IN1-01\":\"1\",\"IN1-12\":\"20161201\",\"IN1-22\":\"1\",\"IN1-44\":[{\"XAD-06\":\"US\"}],\"IN1-43\":\"N\",\"IN1-17\":{\"CE_0063-01\":\"Self\"},\"IN1-05\":[{\"XAD-04\":\"MD\",\"XAD-05\":\"56589895\",\"XAD-03\":\"BALTIMORE\",\"XAD-01\":{\"SAD-01\":\"7500 SECURITY BOULEVARD\"}}],\"IN1-16\":[{\"XPN-02\":\"BRUCE\",\"XPN-01\":{\"FN-01\":\"BATMAN\"},\"XPN-03\":\"G\"}],\"IN1-04\":[{\"XON-01\":\"MEDICARE\"}],\"IN1-26\":\"20190422090744\",\"IN1-03\":[{\"CX-01\":\"1081\"}],\"IN1-25\":\"YES\",\"IN1-36\":\"1454789979898454\",\"IN1-47\":\"BOTH\",\"IN1-19\":[{\"XAD-09\":\"KINGS\",\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"081878\",\"XAD-03\":\"MANAHATTAN\",\"XAD-01\":{\"SAD-01\":\"154548787 E PARKWAY\"}}],\"IN1-18\":{\"TS-01\":\"19530624\"}},\"ZIN\":{\"ZIN-10\":\"Self\",\"ZIN-07\":\"GUIDO\",\"ZIN-08\":\"19530624\",\"ZIN-09\":\"SLF\"}},{\"IN2\":{\"IN2-05\":[\"Payor Plan\"],\"IN2-02\":\"999-99-9999\",\"IN2-63\":[{\"XTN-01\":\"(347)587-6558\",\"XTN-07\":\"5876558\",\"XTN-06\":\"347\"}],\"IN2-61\":{\"CX-01\":\"34187040211\"}},\"IN1\":{\"IN1-42\":{\"CE_0066-01\":\"Retired\"},\"IN1-02\":{\"CE_0072-01\":\"100000\",\"CE_0072-02\":\"AARP SUPPLEMENTAL\"},\"IN1-35\":\"487987987\",\"IN1-01\":\"2\",\"IN1-12\":\"20190101\",\"IN1-22\":\"2\",\"IN1-44\":[{\"XAD-06\":\"US\"}],\"IN1-43\":\"F\",\"IN1-17\":{\"CE_0063-01\":\"Self\"},\"IN1-05\":[{\"XAD-04\":\"GA\",\"XAD-05\":\"30374-0819\",\"XAD-03\":\"ATLANTA\",\"XAD-01\":{\"SAD-01\":\"PO BOX 740819\"}}],\"IN1-16\":[{\"XPN-02\":\"JANE\",\"XPN-01\":{\"FN-01\":\"WONDER\"},\"XPN-03\":\"G\"}],\"IN1-04\":[{\"XON-01\":\"AARP SUPPLEMENTAL\"}],\"IN1-26\":\"20190422090801\",\"IN1-03\":[{\"CX-01\":\"1000\"}],\"IN1-25\":\"YES\",\"IN1-36\":\"154546544\",\"IN1-47\":\"BOTH\",\"IN1-19\":[{\"XAD-09\":\"KINGS\",\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"98524\",\"XAD-03\":\"JERSEY CITY\",\"XAD-01\":{\"SAD-01\":\"1458 BRONX AVE\"}}],\"IN1-18\":{\"TS-01\":\"19530624\"}},\"ZIN\":{}},{\"ZIN\":{\"ZIN-10\":\"Self\",\"ZIN-09\":\"SLF\"},\"ROL\":{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"1\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1178\",\"XTN-07\":\"6061178\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)772-6389\",\"XTN-07\":\"7726389\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170222\"},\"ROL-04\":[{\"XCN-04\":\"F\",\"XCN-02\":{\"FN-01\":\"WARREN\"},\"XCN-03\":\"RUSSELL\",\"XCN-01\":\"61\"}]}},{\"ROL\":{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"2\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1060\",\"XTN-07\":\"6061060\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)794-2543\",\"XTN-07\":\"7942543\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170330\"},\"ROL-04\":[{\"XCN-04\":\"K\",\"XCN-02\":{\"FN-01\":\"MAGID\"},\"XCN-03\":\"STEVEN\",\"XCN-01\":\"72\"}]}}],\"ZPD\":{\"ZPD-09\":\"N\",\"ZPD-21\":\"F\",\"ZPD-20\":\"M\",\"ZPD-04\":\"ACTIVATED\",\"ZPD-02\":\"Email\",\"ZPD-07\":\"N\"},\"DG1\":[{\"DG1-02\":\"I10\",\"DG1-01\":\"1\",\"DG1-04\":\"Latex allergy status\",\"DG1-03\":{\"CE_0051-03\":\"I10\",\"CE_0051-02\":\"Latex allergy status\",\"CE_0051-01\":\"Z91.040\"},\"DG1-05\":{\"TS-01\":\"20180828134022\"}}],\"ROLE\":[{\"ROL\":[{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"1\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1178\",\"XTN-07\":\"6061178\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)772-6389\",\"XTN-07\":\"7726389\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170222\"},\"ROL-04\":[{\"XCN-04\":\"F\",\"XCN-02\":{\"FN-01\":\"WARREN\"},\"XCN-03\":\"RUSSELL\",\"XCN-01\":\"61\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"2\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1060\",\"XTN-07\":\"6061060\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)794-2543\",\"XTN-07\":\"7942543\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170330\"},\"ROL-04\":[{\"XCN-04\":\"K\",\"XCN-02\":{\"FN-01\":\"MAGID\"},\"XCN-03\":\"STEVEN\",\"XCN-01\":\"72\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"3\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1909\",\"XTN-07\":\"6061909\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)879-6526\",\"XTN-07\":\"8796526\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20171206\"},\"ROL-04\":[{\"XCN-04\":\"W\",\"XCN-02\":{\"FN-01\":\"ALTCHEK\"},\"XCN-03\":\"DAVID\",\"XCN-01\":\"161\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"4\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1932\",\"XTN-07\":\"6061932\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(999)999-9999\",\"XTN-07\":\"9999999\",\"XTN-06\":\"999\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170331\"},\"ROL-04\":[{\"XCN-04\":\"P\",\"XCN-02\":{\"FN-01\":\"FIGGIE\"},\"XCN-03\":\"MARK\",\"XCN-01\":\"162\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"5\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1329\",\"XTN-07\":\"6061329\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)570-6147\",\"XTN-07\":\"5706147\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160429\"},\"ROL-04\":[{\"XCN-04\":\"C\",\"XCN-02\":{\"FN-01\":\"HALPERN\"},\"XCN-03\":\"BRIAN\",\"XCN-01\":\"220\"}]}]}],\"NK1\":[{\"NK1-07\":{\"CE_0131-01\":\"Emergency Contact 1\"},\"NK1-02\":[{\"XPN-02\":\"NO\",\"XPN-01\":{\"FN-01\":\"CONTACT\"}}],\"NK1-01\":\"1\",\"NK1-04\":[{\"XAD-06\":\"US\"}],\"NK1-03\":{\"CE_0063-01\":\"Spouse\"},\"NK1-05\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(000)000-0000\",\"XTN-07\":\"0000000\",\"XTN-06\":\"000\"}]}],\"ZPV\":[{\"ZPV-11\":\"20180823162700\"}],\"ACC\":{\"ACC-10\":\"Y\",\"ACC-01\":{\"TS-01\":\"20190816010247\"},\"ACC-06\":\"Y\",\"ACC-05\":\"N\"},\"MSH\":{\"MSH-10\":\"225971\",\"MSH-11\":{\"PT-01\":\"T\"},\"MSH-12\":{\"VID-01\":\"2.4\"},\"MSH-03\":{\"HD-01\":\"EPIC\"},\"MSH-04\":{\"HD-01\":\"HSS\"},\"MSH-07\":{\"TS-01\":\"20190716085715\"},\"MSH-08\":\"ORTMD\",\"MSH-09\":{\"MSG-02\":\"A08\",\"MSG-01\":\"ADT\"}},\"CON\":[{\"CON-11\":\"Received\",\"CON-01\":\"1\",\"CON-02\":\"HIPAA NOP\",\"CON-13\":\"20150922163200\"},{\"CON-11\":\"Received\",\"CON-01\":\"2\",\"CON-02\":\"ADLW\",\"CON-13\":\"20151214134300\"},{\"CON-11\":\"Received\",\"CON-01\":\"3\",\"CON-02\":\"Insur Card\",\"CON-13\":\"20151214134300\"},{\"CON-11\":\"Received\",\"CON-01\":\"4\",\"CON-02\":\"Photo ID\",\"CON-13\":\"20151214134300\"},{\"CON-11\":\"Received\",\"CON-01\":\"5\",\"CON-02\":\"Ebola Forms\",\"CON-13\":\"20151214134300\"},{\"CON-11\":\"Received\",\"CON-15\":\"20161213000000\",\"CON-01\":\"6\",\"CON-02\":\"Phy Consent\",\"CON-13\":\"20151214134500\"},{\"CON-11\":\"Not Recv\",\"CON-15\":\"20170123235959\",\"CON-01\":\"7\",\"CON-02\":\"Contract Phy\",\"CON-13\":\"20160125165147\"},{\"CON-11\":\"Received\",\"CON-15\":\"20170306235959\",\"CON-01\":\"8\",\"CON-02\":\"Financial Co\",\"CON-13\":\"20160307110800\"},{\"CON-11\":\"Received\",\"CON-15\":\"20170306235959\",\"CON-01\":\"9\",\"CON-02\":\"op gen cnsnt\",\"CON-13\":\"20160307110800\"},{\"CON-11\":\"Received\",\"CON-01\":\"10\",\"CON-02\":\"Late Patient\",\"CON-13\":\"20160307110800\"},{\"CON-11\":\"Received\",\"CON-15\":\"20170306235959\",\"CON-01\":\"11\",\"CON-02\":\"Private Phys\",\"CON-13\":\"20160307110800\"},{\"CON-03\":\"Perceptive Content Scan\",\"CON-01\":\"12\",\"CON-02\":\"ABN Notice\"},{\"CON-11\":\"Received\",\"CON-15\":\"20171021235959\",\"CON-01\":\"13\",\"CON-02\":\"Out of Netwo\",\"CON-13\":\"20170724103300\"},{\"CON-11\":\"Healthix App\",\"CON-03\":\"Perceptive Content Scan\",\"CON-01\":\"14\",\"CON-02\":\"Healthix Con\",\"CON-13\":\"20190226132400\"},{\"CON-11\":\"Received\",\"CON-01\":\"15\",\"CON-02\":\"CEAuthSc\",\"CON-13\":\"20170320172000\"},{\"CON-11\":\"Received\",\"CON-15\":\"20180327235959\",\"CON-01\":\"16\",\"CON-02\":\"op gen cnsnt\",\"CON-13\":\"20170328144200\"},{\"CON-11\":\"Received\",\"CON-15\":\"20180327235959\",\"CON-01\":\"17\",\"CON-02\":\"Private Phys\",\"CON-13\":\"20170328144200\"},{\"CON-11\":\"Received\",\"CON-15\":\"20180327235959\",\"CON-01\":\"18\",\"CON-02\":\"op gen cnsnt\",\"CON-13\":\"20170328144300\"},{\"CON-11\":\"Received\",\"CON-15\":\"20180327235959\",\"CON-01\":\"19\",\"CON-02\":\"Contract Phy\",\"CON-13\":\"20170328144300\"},{\"CON-11\":\"Received\",\"CON-03\":\"Perceptive Content Scan\",\"CON-01\":\"20\",\"CON-02\":\"ADLW\",\"CON-13\":\"20171107\"},{\"CON-03\":\"TEST CRM\",\"CON-01\":\"21\",\"CON-02\":\"POA\",\"CON-13\":\"20180321\"},{\"CON-11\":\"Received\",\"CON-15\":\"20190607235959\",\"CON-01\":\"22\",\"CON-02\":\"op gen cnsnt\",\"CON-13\":\"20180608101200\"},{\"CON-11\":\"Received\",\"CON-15\":\"20190607235959\",\"CON-01\":\"23\",\"CON-02\":\"Private Phys\",\"CON-13\":\"20180608101200\"},{\"CON-11\":\"Not Recv\",\"CON-01\":\"24\",\"CON-02\":\"Fin Dis Cros\"},{\"CON-11\":\"Received\",\"CON-03\":\"Perceptive Content Scan\",\"CON-01\":\"25\",\"CON-02\":\"ADLW\",\"CON-13\":\"20190226\"},{\"CON-03\":\"Perceptive Content Scan\",\"CON-01\":\"26\",\"CON-02\":\"Clinical Pho\",\"CON-13\":\"20190501\"}],\"PROCEDURE\":[{\"PR1\":{\"PR1-01\":\"1\",\"PR1-06\":\"A\",\"PR1-17\":\"1\",\"PR1-18\":[{\"CE_0417-01\":\"0\"}],\"PR1-05\":{\"TS-01\":\"20190816015318\"},\"PR1-14\":\"0\"},\"ROL\":[{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"1\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1178\",\"XTN-07\":\"6061178\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)772-6389\",\"XTN-07\":\"7726389\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170222\"},\"ROL-04\":[{\"XCN-04\":\"F\",\"XCN-02\":{\"FN-01\":\"WARREN\"},\"XCN-03\":\"RUSSELL\",\"XCN-01\":\"61\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"2\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1060\",\"XTN-07\":\"6061060\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)794-2543\",\"XTN-07\":\"7942543\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170330\"},\"ROL-04\":[{\"XCN-04\":\"K\",\"XCN-02\":{\"FN-01\":\"MAGID\"},\"XCN-03\":\"STEVEN\",\"XCN-01\":\"72\"}]}]}],\"OBX\":[{\"OBX-01\":\"1\",\"OBX-12\":{\"TS-01\":\"20190815225751\"},\"OBX-11\":\"F\",\"OBX-03\":{\"CE-01\":\"HT\",\"CE-02\":\"HEIGHT\"},\"OBX-14\":{\"TS-01\":\"20190606\"},\"OBX-02\":\"NM\",\"OBX-05\":[{\"OBX-05\":\"53.54\"}],\"OBX-06\":{\"CE-01\":\"in\"},\"OBX-08\":\"Y\",\"OBX-19\":{\"TS-01\":\"20190815225758\"},\"OBX-10\":\"B\"},{\"OBX-01\":\"2\",\"OBX-12\":{\"TS-01\":\"20190815225822\"},\"OBX-11\":\"N\",\"OBX-03\":{\"CE-01\":\"WT\",\"CE-02\":\"WEIGHT\"},\"OBX-14\":{\"TS-01\":\"20190606\"},\"OBX-02\":\"NM\",\"OBX-05\":[{\"OBX-05\":\"114\"}],\"OBX-06\":{\"CE-01\":\"lb\"},\"OBX-08\":\"A\",\"OBX-19\":{\"TS-01\":\"20190815225829\"},\"OBX-10\":\"B\"}],\"GT1\":[{\"GT1-05\":[{\"XAD-09\":\"NEW YORK\",\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"1 MAIN STREET\"}}],\"GT1-06\":[{\"XTN-01\":\"(914)269-4886\",\"XTN-07\":\"2694886\",\"XTN-06\":\"914\"}],\"GT1-17\":[{\"XAD-06\":\"US\"}],\"GT1-03\":[{\"XPN-02\":\"DONOTUSE\",\"XPN-01\":{\"FN-01\":\"ALISHA\"}}],\"GT1-01\":\"1\",\"GT1-12\":\"112-35-8687\",\"GT1-02\":[{\"CX-01\":\"139860\"}],\"GT1-10\":\"P\/F\",\"GT1-11\":{\"CE_0063-01\":\"SLF\"},\"GT1-20\":\"Full\",\"GT1-09\":\"F\",\"GT1-08\":{\"TS-01\":\"19930409\"}}],\"AL1\":[{\"AL1-02\":{\"CE_0127-01\":\"AA\"},\"AL1-04\":{\"CE_0128-01\":\"MI\"},\"AL1-06\":\"20190816150542\"}],\"PID\":{\"PID-05\":[{\"XPN-06\":\"MD\",\"XPN-05\":\"DR\",\"XPN-07\":\"AL\",\"XPN-02\":\"DONOTUSE\",\"XPN-01\":{\"FN-01\":\"ALISHA\"},\"XPN-04\":\"JR\",\"XPN-03\":\"OTHERNAME\"},{\"XPN-06\":\"MD\",\"XPN-05\":\"DR\",\"XPN-07\":\"AL\",\"XPN-02\":\"DONOTUSE\",\"XPN-01\":{\"FN-01\":\"ALISHA\"},\"XPN-04\":\"JR\",\"XPN-03\":\"OTHERNAME\"},{\"XPN-06\":\"MD\",\"XPN-05\":\"DR\",\"XPN-07\":\"AL\",\"XPN-02\":\"DONOTUSE\",\"XPN-01\":{\"FN-01\":\"ALISHA\"},\"XPN-04\":\"JR\",\"XPN-03\":\"OTHERNAME\"}],\"PID-16\":{\"CE_0002-01\":\"MARRIED\"},\"PID-15\":{\"CE_0296-01\":\"ENG\"},\"PID-03\":[{\"CX-01\":\"50031957\",\"CX-04\":{\"HD-01\":\"MR\"},\"CX-05\":\"MR\"},{\"CX-01\":\"E179621\",\"CX-04\":{\"HD-01\":\"EPIC\"},\"CX-05\":\"MRN\"}],\"PID-14\":[{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"CP\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"CP\",\"XTN-07\":\"2694886\",\"XTN-05\":\"1\",\"XTN-06\":\"914\"},{\"XTN-03\":\"Internet\",\"XTN-04\":\"tuckera@hss.edu\",\"XTN-02\":\"NET\"}],\"PID-13\":[{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"CP\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"CP\",\"XTN-07\":\"2694886\",\"XTN-05\":\"1\",\"XTN-06\":\"914\"},{\"XTN-03\":\"Internet\",\"XTN-04\":\"tuckera@hss.edu\",\"XTN-02\":\"NET\"}],\"PID-24\":\"N\",\"PID-01\":\"1\",\"PID-12\":\"NEW YORK\",\"PID-11\":[{\"XAD-09\":\"NEW YORK 1 MAIN STREET\",\"XAD-06\":\"US\",\"XAD-07\":\"L\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021\",\"XAD-03\":\"NEW YORK\",\"XAD-11\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"1 MAIN STREET\"},\"XAD-12\":{\"DR-01\":{\"TS-01\":\"NY\"}}},{\"XAD-09\":\"NEW YORK\",\"XAD-06\":\"US\",\"XAD-07\":\"L\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"1 MAIN STREET\"}}],\"PID-22\":[{\"CE_0189-01\":\"NOT HISPANIC\"}],\"PID-10\":[{\"CE_0005-01\":\"Pac Islander\"},{\"CE_0005-01\":\"Asian\"},{\"CE_0005-01\":\"Other\"}],\"PID-08\":\"F\",\"PID-19\":\"112-35-8687\",\"PID-07\":{\"TS-01\":\"19930409\"},\"PID-18\":{\"CX-01\":\"200081549\"},\"PID-17\":{\"CE_0006-01\":\"BMA\"},\"PID-30\":\"N\"},\"PV1\":{\"PV1-41\":\"Adm*Conf\",\"PV1-50\":{\"CX-01\":\"100182350023\"},\"PV1-04\":\"EL\",\"PV1-02\":\"INPATIENT\",\"PV1-03\":{\"PL-01\":\"8EN\",\"PL-02\":\"811\",\"PL-05\":\"R\",\"PL-03\":\"811-1\",\"PL-04\":{\"HD-01\":\"MAINH\"}},\"PV1-14\":\"Phys\/Clinic\",\"PV1-47\":\"2132367\",\"PV1-44\":{\"TS-01\":\"20180823162700\"},\"PV1-01\":\"1\",\"PV1-20\":[{\"FC-01\":\"BCBS\"}],\"PV1-10\":\"Surgical Art\",\"PV1-08\":[{\"XCN-04\":\"P\",\"XCN-02\":{\"FN-01\":\"FIGGIE\"},\"XCN-03\":\"MARK\",\"XCN-01\":\"162\"}],\"PV1-19\":{\"CX-01\":\"200081549\"},\"PV1-17\":[{\"XCN-04\":\"P\",\"XCN-02\":{\"FN-01\":\"FIGGIE\"},\"XCN-03\":\"MARK\",\"XCN-01\":\"162\"}],\"PV1-07\":[{\"XCN-04\":\"P\",\"XCN-02\":{\"FN-01\":\"FIGGIE\"},\"XCN-03\":\"MARK\",\"XCN-01\":\"162\"}]},\"PV2\":{\"PV2-02\":{\"CE_0129-01\":\"Semi Private\"},\"PV2-12\":\"Hospital Encounter\",\"PV2-22\":\"N\",\"PV2-21\":\"n\",\"PV2-32\":\"N\",\"PV2-08\":{\"TS-01\":\"20180823\"}},\"ROL\":[{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"1\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1178\",\"XTN-07\":\"6061178\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)772-6389\",\"XTN-07\":\"7726389\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170222\"},\"ROL-04\":[{\"XCN-04\":\"F\",\"XCN-02\":{\"FN-01\":\"WARREN\"},\"XCN-03\":\"RUSSELL\",\"XCN-01\":\"61\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"2\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1060\",\"XTN-07\":\"6061060\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)794-2543\",\"XTN-07\":\"7942543\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170330\"},\"ROL-04\":[{\"XCN-04\":\"K\",\"XCN-02\":{\"FN-01\":\"MAGID\"},\"XCN-03\":\"STEVEN\",\"XCN-01\":\"72\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"3\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1909\",\"XTN-07\":\"6061909\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)879-6526\",\"XTN-07\":\"8796526\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20171206\"},\"ROL-04\":[{\"XCN-04\":\"W\",\"XCN-02\":{\"FN-01\":\"ALTCHEK\"},\"XCN-03\":\"DAVID\",\"XCN-01\":\"161\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"4\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1932\",\"XTN-07\":\"6061932\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(999)999-9999\",\"XTN-07\":\"9999999\",\"XTN-06\":\"999\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170331\"},\"ROL-04\":[{\"XCN-04\":\"P\",\"XCN-02\":{\"FN-01\":\"FIGGIE\"},\"XCN-03\":\"MARK\",\"XCN-01\":\"162\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"5\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1329\",\"XTN-07\":\"6061329\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)570-6147\",\"XTN-07\":\"5706147\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160429\"},\"ROL-04\":[{\"XCN-04\":\"C\",\"XCN-02\":{\"FN-01\":\"HALPERN\"},\"XCN-03\":\"BRIAN\",\"XCN-01\":\"220\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"6\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1686\",\"XTN-07\":\"6061686\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-2196\",\"XTN-07\":\"7742196\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Anesthesiolo\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180608\"},\"ROL-04\":[{\"XCN-04\":\"A\",\"XCN-02\":{\"FN-01\":\"WALDMAN\"},\"XCN-03\":\"SETH\",\"XCN-01\":\"244\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"7\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1798\",\"XTN-07\":\"6061798\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-2600\",\"XTN-07\":\"7742600\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160406\"},\"ROL-04\":[{\"XCN-04\":\"S\",\"XCN-02\":{\"FN-01\":\"SANDHU\"},\"XCN-03\":\"HARVINDER\",\"XCN-01\":\"279\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"8\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)554-2878\",\"XTN-07\":\"5542878\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(866)617-6509\",\"XTN-07\":\"6176509\",\"XTN-06\":\"866\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4099\",\"XAD-02\":\"7TH FL\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"523 E 72ND STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180629\"},\"ROL-04\":[{\"XCN-04\":\"D\",\"XCN-02\":{\"FN-01\":\"PEARLE\"},\"XCN-03\":\"ANDREW\",\"XCN-01\":\"636\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"9\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1469\",\"XTN-07\":\"6061469\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)327-1417\",\"XTN-07\":\"3271417\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20161014\"},\"ROL-04\":[{\"XCN-04\":\"A\",\"XCN-02\":{\"FN-01\":\"HANNAFIN\"},\"XCN-03\":\"JO\",\"XCN-01\":\"707\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"10\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)774-2515\",\"XTN-07\":\"7742515\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-2918\",\"XTN-07\":\"7742918\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4099\",\"XAD-02\":\"2ND FL\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"523 E 72ND STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20171206\"},\"ROL-04\":[{\"XCN-04\":\"E\",\"XCN-02\":{\"FN-01\":\"CUNNINGHAM\"},\"XCN-03\":\"MATTHEW\",\"XCN-01\":\"1141\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"11\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1440\",\"XTN-07\":\"6061440\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-7190\",\"XTN-07\":\"7747190\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170719\"},\"ROL-04\":[{\"XCN-04\":\"T\",\"XCN-02\":{\"FN-01\":\"FUFA\"},\"XCN-03\":\"DURETTI\",\"XCN-01\":\"1638\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"12\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)774-2837\",\"XTN-07\":\"7742837\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(646)797-8428\",\"XTN-07\":\"7978428\",\"XTN-06\":\"646\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180321\"},\"ROL-04\":[{\"XCN-04\":\"JO\",\"XCN-02\":{\"FN-01\":\"KIM\"},\"XCN-03\":\"HAN\",\"XCN-01\":\"1650\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"13\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1620\",\"XTN-07\":\"6061620\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)606-1605\",\"XTN-07\":\"6061605\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160425\"},\"ROL-04\":[{\"XCN-04\":\"J\",\"XCN-02\":{\"FN-01\":\"KOLLAKUZHIYIL\"},\"XCN-03\":\"MARY\",\"XCN-01\":\"1806\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"14\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)774-7659\",\"XTN-07\":\"7747659\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-7627\",\"XTN-07\":\"7747627\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170726\"},\"ROL-04\":[{\"XCN-02\":{\"FN-01\":\"LEALI\"},\"XCN-03\":\"ALEJANDRO\",\"XCN-01\":\"1842\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"15\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1461\",\"XTN-07\":\"6061461\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-2734\",\"XTN-07\":\"7742734\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180215\"},\"ROL-04\":[{\"XCN-04\":\"B\",\"XCN-02\":{\"FN-01\":\"LEVINE\"},\"XCN-03\":\"ALANA\",\"XCN-01\":\"3049\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"16\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1744\",\"XTN-07\":\"6061744\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(646)714-6755\",\"XTN-07\":\"7146755\",\"XTN-06\":\"646\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"NP\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160429\"},\"ROL-04\":[{\"XCN-04\":\"A\",\"XCN-02\":{\"FN-01\":\"DONOHUE\"},\"XCN-03\":\"PATRICIA\",\"XCN-01\":\"3130\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"17\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)774-7180\",\"XTN-07\":\"7747180\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-7347\",\"XTN-07\":\"7747347\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170116\"},\"ROL-04\":[{\"XCN-04\":\"A\",\"XCN-02\":{\"FN-01\":\"JERABEK\"},\"XCN-03\":\"SETH\",\"XCN-01\":\"3189\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"18\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(646)714-6013\",\"XTN-07\":\"7146013\",\"XTN-06\":\"646\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)606-1605\",\"XTN-07\":\"6061605\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"NP\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180823\"},\"ROL-04\":[{\"XCN-04\":\"A\",\"XCN-02\":{\"FN-01\":\"SCORZIELLO\"},\"XCN-03\":\"BARBARA\",\"XCN-01\":\"3482\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"19\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)774-2944\",\"XTN-07\":\"7742944\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(646)797-8551\",\"XTN-07\":\"7978551\",\"XTN-06\":\"646\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160509\"},\"ROL-04\":[{\"XCN-04\":\"S\",\"XCN-02\":{\"FN-01\":\"GRIFFIN\"},\"XCN-03\":\"ROBERT\",\"XCN-01\":\"3499\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"20\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1466\",\"XTN-07\":\"6061466\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)606-1477\",\"XTN-07\":\"6061477\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4898\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH ST\"}}],\"ROL-03\":{\"CE_0443-01\":\"Fellow\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180628\"},\"ROL-04\":[{\"XCN-04\":\"S\",\"XCN-02\":{\"FN-01\":\"MCLAWHORN\"},\"XCN-03\":\"ALEXANDER\",\"XCN-01\":\"5140\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"21\"},\"ROL-03\":{\"CE_0443-01\":\"PT\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170724\"},\"ROL-04\":[{\"XCN-04\":\"M\",\"XCN-02\":{\"FN-01\":\"BAKER\"},\"XCN-03\":\"SARAH\",\"XCN-01\":\"51000016\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"22\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(555)555-5555\",\"XTN-07\":\"5555555\",\"XTN-06\":\"555\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)717-0156\",\"XTN-07\":\"7170156\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-09\":\"DANE\",\"XAD-04\":\"WI\",\"XAD-05\":\"53711\",\"XAD-03\":\"MADISON\",\"XAD-01\":{\"SAD-01\":\"123 ANYWHERE STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Referring MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170331\"},\"ROL-04\":[{\"XCN-02\":{\"FN-01\":\"FAMILY MEDICINE\"},\"XCN-03\":\"PHYSICIAN\",\"XCN-01\":\"E1000\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"23\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(555)555-5555\",\"XTN-07\":\"5555555\",\"XTN-06\":\"555\"}],\"ROL-11\":[{\"XAD-09\":\"DANE\",\"XAD-04\":\"WI\",\"XAD-05\":\"53711\",\"XAD-03\":\"MADISON\",\"XAD-01\":{\"SAD-01\":\"123 ANYWHERE STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160401\"},\"ROL-04\":[{\"XCN-02\":{\"FN-01\":\"ORTHOPEDICS\"},\"XCN-03\":\"PHYSICIAN\",\"XCN-01\":\"E1007\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"24\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(555)555-5555\",\"XTN-07\":\"5555555\",\"XTN-06\":\"555\"}],\"ROL-11\":[{\"XAD-09\":\"DANE\",\"XAD-04\":\"WI\",\"XAD-05\":\"53593\",\"XAD-03\":\"VERONA\",\"XAD-01\":{\"SAD-01\":\"123 ANYWHERE STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170426\"},\"ROL-04\":[{\"XCN-02\":{\"FN-01\":\"INTERNAL MEDICINE\"},\"XCN-03\":\"PHYSICIAN\",\"XCN-01\":\"E1051\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"25\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(555)555-5555\",\"XTN-07\":\"5555555\",\"XTN-06\":\"555\"}],\"ROL-11\":[{\"XAD-09\":\"DANE\",\"XAD-04\":\"WI\",\"XAD-05\":\"53593\",\"XAD-03\":\"VERONA\",\"XAD-01\":{\"SAD-01\":\"123 ANYWHERE STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"NP\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160512\"},\"ROL-04\":[{\"XCN-02\":{\"FN-01\":\"FAMILY MEDICINE\"},\"XCN-03\":\"NP\",\"XCN-01\":\"E400103\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"26\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)988-6600\",\"XTN-07\":\"9886600\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)988-6602\",\"XTN-07\":\"9886602\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-09\":\"NEW YORK\",\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"101 E 78TH ST\"}}],\"ROL-03\":{\"CE_0443-01\":\"GENERAL\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20150916\"},\"ROL-04\":[{\"XCN-04\":\"N\",\"XCN-02\":{\"FN-01\":\"BORNSTEIN\"},\"XCN-03\":\"HAROLD\",\"XCN-01\":\"R1000154\"}],\"ROL-06\":{\"TS-01\":\"20190127\"},\"ROL-09\":[{\"CE-01\":\"GENERAL\"}]}],\"DB1\":[{\"DB1-08\":\"20190816014829\",\"DB1-06\":\"20190816014754\",\"DB1-07\":\"20190816014756\",\"DB1-01\":\"1\",\"DB1-04\":\"N\",\"DB1-05\":\"20190816014750\",\"DB1-02\":\"AP\"}],\"NTE1\":[{\"NTE-01\":\"1\",\"NTE-02\":\"L\",\"NTE-04\":{\"CE_0364-01\":\"2R\"}}],\"LAN\":{\"LAN-04\":\"2\",\"LAN-01\":\"1\",\"LAN-02\":\"12456\",\"LAN-03\":\"1\"},\"DRG\":{\"DRG-08\":\"C\",\"DRG-05\":{\"CE_0083-01\":\"C\"},\"DRG-02\":{\"TS-01\":\"20190816015205\"},\"DRG-03\":\"N\",\"DRG-11\":\"E\",\"DRG-10\":\"N\"},\"EVN\":{\"EVN-04\":\"REG_PAT_CHANGE_SEND_VISIT_MESSAGES_ON_PATIENT_CHANGES\",\"EVN-05\":[{\"XCN-02\":{\"FN-01\":\"ORTHOPAEDICS\"},\"XCN-03\":\"PHYSICIAN\",\"XCN-14\":{\"HD-01\":\"TULLYHLTH\"},\"XCN-09\":{\"HD-01\":\"HSS90\"}}],\"EVN-02\":{\"TS-01\":\"20190716085715\"},\"EVN-01\":\"A08\"},\"PD1\":{\"PD1-01\":[\"C\"],\"PD1-02\":\"A\",\"PD1-03\":[{\"XON-01\":\"DR. MICHAEL CROSS' PRACTICE AT THE HSS PAVILION\",\"XON-03\":\"1041002\"}],\"PD1-04\":[{\"XCN-04\":\"IN SYSTEM\",\"XCN-02\":{\"FN-01\":\"PROVIDER\"},\"XCN-03\":\"NOT\",\"XCN-01\":\"E9999999\"}],\"PD1-06\":\"3\"},\"NTE\":[{\"NTE-01\":\"1\",\"NTE-02\":\"L\",\"NTE-04\":{\"CE_0364-01\":\"AI\"}}]}},\"Id\":\"ADT_A08\",\"Name\":\"ADT_A08\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="A28" format="json">
+      <types:shape format="weave" example="examples/inputA28UP.json"><![CDATA[%dw 2.0
+
+type A28 = {|
+  Delimiters: String, 
+  Errors: Array<Any>, 
+  MSH: {|
+    "MSH-10": String, 
+    "MSH-11": {| "PT-01": String |}, 
+    "MSH-12": {| "VID-01": String |}, 
+    "MSH-03": {| "HD-01": String |}, 
+    "MSH-04": {| "HD-01": String |}, 
+    "MSH-05": {| "HD-01": String |}, 
+    "MSH-06": {| "HD-01": String |}, 
+    "MSH-07": {| "TS-01": String |}, 
+    "MSH-08": String, 
+    "MSH-09": {|
+      "MSG-02": String, 
+      "MSG-01": String
+    |}
+  |}, 
+  ACK: {|
+    MSH: {|
+      "MSH-10": String, 
+      "MSH-11": {| "PT-01": String |}, 
+      "MSH-12": {| "VID-01": String |}, 
+      "MSH-03": {| "HD-01": String |}, 
+      "MSH-04": {| "HD-01": String |}, 
+      "MSH-05": {| "HD-01": String |}, 
+      "MSH-06": {| "HD-01": String |}, 
+      "MSH-07": {| "TS-01": String |}, 
+      "MSH-08": String, 
+      "MSH-09": {|
+        "MSG-03": String, 
+        "MSG-02": String, 
+        "MSG-01": String
+      |}
+    |}, 
+    ERR: Array<Any>, 
+    MSA: {|
+      "MSA-02": String, 
+      "MSA-01": String
+    |}
+  |}, 
+  Data: {|
+    ADT_A28: {|
+      ACC: {|
+        "ACC-10": String, 
+        "ACC-01": {| "TS-01": String |}, 
+        "ACC-06": String, 
+        "ACC-05": String
+      |}, 
+      MSH: {|
+        "MSH-10": String, 
+        "MSH-11": {| "PT-01": String |}, 
+        "MSH-12": {| "VID-01": String |}, 
+        "MSH-03": {| "HD-01": String |}, 
+        "MSH-04": {| "HD-01": String |}, 
+        "MSH-05": {| "HD-01": String |}, 
+        "MSH-06": {| "HD-01": String |}, 
+        "MSH-07": {| "TS-01": String |}, 
+        "MSH-08": String, 
+        "MSH-09": {|
+          "MSG-02": String, 
+          "MSG-01": String
+        |}
+      |}, 
+      CON: Array<{|        "CON-11": String,         "CON-01": String,         "CON-02": String,         "CON-13": String,         "CON-15": String,         "CON-03": String      |}>, 
+      PROCEDURE: Array<{|        PR1: {|          "PR1-01": String,           "PR1-06": String,           "PR1-17": String,           "PR1-18": Array<{| "CE_0417-01": String |}>, 
+          "PR1-05": {| "TS-01": String |}, 
+          "PR1-14": String
+        |}, 
+        ROL: Array<{|          "ROL-10": {| "CE_0406-01": String |},           "ROL-01": {| "EI-01": String |},           "ROL-12": Array<{|            "XTN-03": String,             "XTN-01": String,             "XTN-07": String,             "XTN-06": String          |}>, 
+          "ROL-11": Array<{|            "XAD-06": String,             "XAD-04": String,             "XAD-05": String,             "XAD-03": String,             "XAD-01": {| "SAD-01": String |}          |}>, 
+          "ROL-03": {| "CE_0443-01": String |}, 
+          "ROL-02": String, 
+          "ROL-05": {| "TS-01": String |}, 
+          "ROL-04": Array<{|            "XCN-04": String,             "XCN-02": {| "FN-01": String |},             "XCN-03": String,             "XCN-01": String          |}>
+        |}>
+      |}>, 
+      OBX: Array<{|        "OBX-01": String,         "OBX-12": {| "TS-01": String |},         "OBX-11": String,         "OBX-03": {|          "CE-01": String,           "CE-02": String        |},         "OBX-14": {| "TS-01": String |},         "OBX-02": String,         "OBX-05": Array<{| "OBX-05": String |}>, 
+        "OBX-06": {| "CE-01": String |}, 
+        "OBX-08": String, 
+        "OBX-19": {| "TS-01": String |}, 
+        "OBX-10": String
+      |}>, 
+      UB2: {| "UB2-01": String |}, 
+      GT1: Array<{|        "GT1-05": Array<{|          "XAD-09": String,           "XAD-06": String,           "XAD-04": String,           "XAD-05": String,           "XAD-03": String,           "XAD-01": {| "SAD-01": String |}        |}>, 
+        "GT1-06": Array<{|          "XTN-01": String,           "XTN-07": String,           "XTN-06": String        |}>, 
+        "GT1-17": Array<{| "XAD-06": String |}>, 
+        "GT1-03": Array<{|          "XPN-02": String,           "XPN-01": {| "FN-01": String |}        |}>, 
+        "GT1-01": String, 
+        "GT1-12": String, 
+        "GT1-02": Array<{| "CX-01": String |}>, 
+        "GT1-10": String, 
+        "GT1-11": {| "CE_0063-01": String |}, 
+        "GT1-20": String, 
+        "GT1-09": String, 
+        "GT1-08": {| "TS-01": String |}
+      |}>, 
+      UB1: {|
+        "UB1-18": String, 
+        "UB1-19": String, 
+        "UB1-14": String, 
+        "UB1-15": String, 
+        "UB1-01": String
+      |}, 
+      AL1: Array<{|        "AL1-01": {| "CE-01": String |},         "AL1-02": {| "CE_0127-01": String |},         "AL1-03": {| "CE-02": String |},         "AL1-04": {| "CE_0128-01": String |},         "AL1-06": String      |}>, 
+      INSURANCE: Array<{|        IN2: {|          "IN2-05": Array<String>, 
+          "IN2-02": String, 
+          "IN2-61": {| "CX-01": String |}
+        |}, 
+        IN1: {|
+          "IN1-02": {|
+            "CE_0072-01": String, 
+            "CE_0072-02": String
+          |}, 
+          "IN1-35": String, 
+          "IN1-01": String, 
+          "IN1-12": String, 
+          "IN1-22": String, 
+          "IN1-43": String, 
+          "IN1-17": {| "CE_0063-01": String |}, 
+          "IN1-05": Array<{|            "XAD-04": String,             "XAD-05": String,             "XAD-03": String,             "XAD-01": {| "SAD-01": String |}          |}>, 
+          "IN1-16": Array<{|            "XPN-02": String,             "XPN-01": {| "FN-01": String |}          |}>, 
+          "IN1-04": Array<{| "XON-01": String |}>, 
+          "IN1-26": String, 
+          "IN1-03": Array<{| "CX-01": String |}>, 
+          "IN1-25": String, 
+          "IN1-36": String, 
+          "IN1-47": String, 
+          "IN1-19": Array<{|            "XAD-09": String,             "XAD-06": String,             "XAD-04": String,             "XAD-05": String,             "XAD-03": String,             "XAD-01": {| "SAD-01": String |}          |}>, 
+          "IN1-18": {| "TS-01": String |}
+        |}, 
+        ROL: Array<{|          "ROL-10": {| "CE_0406-01": String |},           "ROL-01": {| "EI-01": String |},           "ROL-12": Array<{|            "XTN-03": String,             "XTN-01": String,             "XTN-07": String,             "XTN-06": String          |}>, 
+          "ROL-11": Array<{|            "XAD-06": String,             "XAD-04": String,             "XAD-05": String,             "XAD-03": String,             "XAD-01": {| "SAD-01": String |}          |}>, 
+          "ROL-03": {| "CE_0443-01": String |}, 
+          "ROL-02": String, 
+          "ROL-05": {| "TS-01": String |}, 
+          "ROL-04": Array<{|            "XCN-04": String,             "XCN-02": {| "FN-01": String |},             "XCN-03": String,             "XCN-01": String          |}>
+        |}>, 
+        IN3: Array<{|          "IN3-05": {| "MOP-01": String |},           "IN3-06": {| "TS-01": String |},           "IN3-07": {| "TS-01": String |},           "IN3-01": String,           "IN3-13": {| "TS-01": String |},           "IN3-04": String,           "IN3-20": Array<{| "PCF-01": String |}>, 
+          "IN3-10": String, 
+          "IN3-11": {| "DTN-01": String |}, 
+          "IN3-22": String, 
+          "IN3-09": String
+        |}>
+      |}>, 
+      PID: {|
+        "PID-05": Array<{|          "XPN-06": String,           "XPN-05": String,           "XPN-07": String,           "XPN-02": String,           "XPN-01": {| "FN-01": String |},           "XPN-04": String,           "XPN-03": String        |}>, 
+        "PID-16": {| "CE_0002-01": String |}, 
+        "PID-27": {| "CE_0172-01": String |}, 
+        "PID-15": {| "CE_0296-01": String |}, 
+        "PID-03": Array<{|          "CX-01": String,           "CX-04": {| "HD-01": String |},           "CX-05": String        |}>, 
+        "PID-14": Array<{|          "XTN-03": String,           "XTN-04": String,           "XTN-01": String,           "XTN-02": String,           "XTN-09": String,           "XTN-07": String,           "XTN-08": String,           "XTN-05": String,           "XTN-06": String        |}>, 
+        "PID-13": Array<{|          "XTN-03": String,           "XTN-04": String,           "XTN-01": String,           "XTN-02": String,           "XTN-09": String,           "XTN-07": String,           "XTN-08": String,           "XTN-05": String,           "XTN-06": String        |}>, 
+        "PID-24": String, 
+        "PID-01": String, 
+        "PID-12": String, 
+        "PID-23": String, 
+        "PID-11": Array<{|          "XAD-06": String,           "XAD-07": String,           "XAD-04": String,           "XAD-05": String,           "XAD-03": String,           "XAD-01": {| "SAD-01": String |},           "XAD-09": String        |}>, 
+        "PID-22": Array<{| "CE_0189-01": String |}>, 
+        "PID-10": Array<{| "CE_0005-01": String |}>, 
+        "PID-20": {| "DLN-01": String |}, 
+        "PID-08": String, 
+        "PID-19": String, 
+        "PID-07": {| "TS-01": String |}, 
+        "PID-18": {| "CX-01": String |}, 
+        "PID-06": Array<{| "XPN-01": {| "FN-01": String |} |}>, 
+        "PID-17": {| "CE_0006-01": String |}, 
+        "PID-30": String
+      |}, 
+      PV1: {|
+        "PV1-41": String, 
+        "PV1-04": String, 
+        "PV1-15": Array<String>, 
+        "PV1-05": {| "CX-01": String |}, 
+        "PV1-02": String, 
+        "PV1-03": {|
+          "PL-01": String, 
+          "PL-04": {| "HD-01": String |}
+        |}, 
+        "PV1-14": String, 
+        "PV1-36": String, 
+        "PV1-44": {| "TS-01": String |}, 
+        "PV1-01": String, 
+        "PV1-45": Array<{| "TS-01": String |}>, 
+        "PV1-20": Array<{| "FC-01": String |}>, 
+        "PV1-08": Array<{|          "XCN-04": String,           "XCN-02": {| "FN-01": String |},           "XCN-03": String,           "XCN-01": String        |}>, 
+        "PV1-19": {| "CX-01": String |}, 
+        "PV1-07": Array<{|          "XCN-04": String,           "XCN-02": {| "FN-01": String |},           "XCN-03": String,           "XCN-01": String        |}>
+      |}, 
+      PV2: {|
+        "PV2-17": String, 
+        "PV2-14": String, 
+        "PV2-12": String, 
+        "PV2-22": String, 
+        "PV2-21": String, 
+        "PV2-09": {| "TS-01": String |}, 
+        "PV2-08": {| "TS-01": String |}, 
+        "PV2-19": String, 
+        "PV2-07": Array<String>, 
+        "PV2-18": String
+      |}, 
+      ROL: Array<{|        "ROL-10": {| "CE_0406-01": String |},         "ROL-01": {| "EI-01": String |},         "ROL-12": Array<{|          "XTN-03": String,           "XTN-01": String,           "XTN-07": String,           "XTN-06": String        |}>, 
+        "ROL-11": Array<{|          "XAD-06": String,           "XAD-04": String,           "XAD-05": String,           "XAD-03": String,           "XAD-01": {| "SAD-01": String |}        |}>, 
+        "ROL-03": {| "CE_0443-01": String |}, 
+        "ROL-02": String, 
+        "ROL-05": {| "TS-01": String |}, 
+        "ROL-04": Array<{|          "XCN-04": String,           "XCN-02": {| "FN-01": String |},           "XCN-03": String,           "XCN-01": String        |}>, 
+        "ROL-06": {| "TS-01": String |}, 
+        "ROL-09": Array<{| "CE-01": String |}>
+      |}>, 
+      ZPD: {|
+        "ZPD-09": String, 
+        "ZPD-21": String, 
+        "ZPD-20": String, 
+        "ZPD-04": String, 
+        "ZPD-02": String, 
+        "ZPD-07": String
+      |}, 
+      DG1: Array<{|        "DG1-09": String,         "DG1-11": {| "CE_0083-01": String |},         "DG1-01": String,         "DG1-15": String,         "DG1-06": String,         "DG1-17": String,         "DG1-05": {| "TS-01": String |},         "DG1-19": {| "TS-01": String |},         "DG1-18": String      |}>, 
+      ROLE: Array<{|        ROL: {|          "ROL-10": {| "CE_0406-01": String |},           "ROL-01": {| "EI-01": String |},           "ROL-12": Array<{|            "XTN-03": String,             "XTN-01": String,             "XTN-07": String,             "XTN-06": String          |}>, 
+          "ROL-11": Array<{|            "XAD-06": String,             "XAD-04": String,             "XAD-05": String,             "XAD-03": String,             "XAD-01": {| "SAD-01": String |}          |}>, 
+          "ROL-03": {| "CE_0443-01": String |}, 
+          "ROL-02": String, 
+          "ROL-05": {| "TS-01": String |}, 
+          "ROL-04": Array<{|            "XCN-04": String,             "XCN-02": {| "FN-01": String |},             "XCN-03": String,             "XCN-01": String          |}>, 
+          "ROL-09": Array<{| "CE-01": String |}>
+        |}
+      |}>, 
+      DB1: Array<{|        "DB1-08": String,         "DB1-06": String,         "DB1-07": String,         "DB1-01": String,         "DB1-04": String,         "DB1-05": String,         "DB1-02": String      |}>, 
+      NK1: Array<{|        "NK1-07": {| "CE_0131-01": String |},         "NK1-02": Array<{|          "XPN-02": String,           "XPN-01": {| "FN-01": String |}        |}>, 
+        "NK1-01": String, 
+        "NK1-04": Array<{| "XAD-06": String |}>, 
+        "NK1-03": {| "CE_0063-01": String |}, 
+        "NK1-05": Array<{|          "XTN-03": String,           "XTN-01": String,           "XTN-07": String,           "XTN-06": String        |}>
+      |}>, 
+      DRG: {|
+        "DRG-08": String, 
+        "DRG-05": {| "CE_0083-01": String |}, 
+        "DRG-02": {| "TS-01": String |}, 
+        "DRG-03": String, 
+        "DRG-11": String, 
+        "DRG-01": {| "CE_0055-01": String |}, 
+        "DRG-10": String
+      |}, 
+      EVN: {|
+        "EVN-04": String, 
+        "EVN-05": Array<{|          "XCN-02": {| "FN-01": String |},           "XCN-03": String,           "XCN-14": {| "HD-01": String |},           "XCN-09": {| "HD-01": String |}        |}>, 
+        "EVN-02": {| "TS-01": String |}, 
+        "EVN-03": {| "TS-01": String |}, 
+        "EVN-01": String
+      |}, 
+      PD1: {|
+        "PD1-08": String, 
+        "PD1-09": String, 
+        "PD1-11": {| "CE_0215-01": String |}, 
+        "PD1-01": Array<String>, 
+        "PD1-12": String, 
+        "PD1-02": String, 
+        "PD1-13": String, 
+        "PD1-03": Array<{|          "XON-01": String,           "XON-03": String        |}>, 
+        "PD1-14": Array<{| "XON-01": String |}>, 
+        "PD1-04": Array<{|          "XCN-04": String,           "XCN-02": {| "FN-01": String |},           "XCN-03": String,           "XCN-01": String        |}>, 
+        "PD1-06": String, 
+        "PD1-07": String, 
+        "PD1-10": Array<{| "CX-01": String |}>
+      |}
+    |}
+  |}, 
+  Id: String, 
+  Name: String
+|} {"example": "{\"Delimiters\":\"|^~\\\\&\",\"Errors\":[],\"MSH\":{\"MSH-10\":\"38881117\",\"MSH-11\":{\"PT-01\":\"P\"},\"MSH-12\":{\"VID-01\":\"2.4\"},\"MSH-03\":{\"HD-01\":\"EPIC\"},\"MSH-04\":{\"HD-01\":\"HSS\"},\"MSH-05\":{\"HD-01\":\"SALESFORCE\"},\"MSH-06\":{\"HD-01\":\"HSS\"},\"MSH-07\":{\"TS-01\":\"20190701072503\"},\"MSH-08\":\"7057\",\"MSH-09\":{\"MSG-02\":\"A28\",\"MSG-01\":\"ADT\"}},\"ACK\":{\"MSH\":{\"MSH-10\":\"38881117\",\"MSH-11\":{\"PT-01\":\"P\"},\"MSH-12\":{\"VID-01\":\"2.4\"},\"MSH-03\":{\"HD-01\":\"SALESFORCE\"},\"MSH-04\":{\"HD-01\":\"HSS\"},\"MSH-05\":{\"HD-01\":\"EPIC\"},\"MSH-06\":{\"HD-01\":\"HSS\"},\"MSH-07\":{\"TS-01\":\"20190701072503\"},\"MSH-08\":\"7057\",\"MSH-09\":{\"MSG-03\":\"ACK\",\"MSG-02\":\"A28\",\"MSG-01\":\"ACK\"}},\"ERR\":[],\"MSA\":{\"MSA-02\":\"38881117\",\"MSA-01\":\"AA\"}},\"Data\":{\"ADT_A28\":{\"ACC\":{\"ACC-10\":\"Y\",\"ACC-01\":{\"TS-01\":\"20190816010247\"},\"ACC-06\":\"Y\",\"ACC-05\":\"N\"},\"MSH\":{\"MSH-10\":\"38881117\",\"MSH-11\":{\"PT-01\":\"P\"},\"MSH-12\":{\"VID-01\":\"2.4\"},\"MSH-03\":{\"HD-01\":\"EPIC\"},\"MSH-04\":{\"HD-01\":\"HSS\"},\"MSH-05\":{\"HD-01\":\"SALESFORCE\"},\"MSH-06\":{\"HD-01\":\"HSS\"},\"MSH-07\":{\"TS-01\":\"20190701072503\"},\"MSH-08\":\"7057\",\"MSH-09\":{\"MSG-02\":\"A28\",\"MSG-01\":\"ADT\"}},\"CON\":[{\"CON-11\":\"Received\",\"CON-01\":\"1\",\"CON-02\":\"HIPAA NOP\",\"CON-13\":\"20150922163200\"},{\"CON-11\":\"Received\",\"CON-01\":\"2\",\"CON-02\":\"ADLW\",\"CON-13\":\"20151214134300\"},{\"CON-11\":\"Received\",\"CON-01\":\"3\",\"CON-02\":\"Insur Card\",\"CON-13\":\"20151214134300\"},{\"CON-11\":\"Received\",\"CON-01\":\"4\",\"CON-02\":\"Photo ID\",\"CON-13\":\"20151214134300\"},{\"CON-11\":\"Received\",\"CON-01\":\"5\",\"CON-02\":\"Ebola Forms\",\"CON-13\":\"20151214134300\"},{\"CON-11\":\"Received\",\"CON-15\":\"20161213000000\",\"CON-01\":\"6\",\"CON-02\":\"Phy Consent\",\"CON-13\":\"20151214134500\"},{\"CON-11\":\"Not Recv\",\"CON-15\":\"20170123235959\",\"CON-01\":\"7\",\"CON-02\":\"Contract Phy\",\"CON-13\":\"20160125165147\"},{\"CON-11\":\"Received\",\"CON-15\":\"20170306235959\",\"CON-01\":\"8\",\"CON-02\":\"Financial Co\",\"CON-13\":\"20160307110800\"},{\"CON-11\":\"Received\",\"CON-15\":\"20170306235959\",\"CON-01\":\"9\",\"CON-02\":\"op gen cnsnt\",\"CON-13\":\"20160307110800\"},{\"CON-11\":\"Received\",\"CON-01\":\"10\",\"CON-02\":\"Late Patient\",\"CON-13\":\"20160307110800\"},{\"CON-11\":\"Received\",\"CON-15\":\"20170306235959\",\"CON-01\":\"11\",\"CON-02\":\"Private Phys\",\"CON-13\":\"20160307110800\"},{\"CON-03\":\"Perceptive Content Scan\",\"CON-01\":\"12\",\"CON-02\":\"ABN Notice\"},{\"CON-11\":\"Received\",\"CON-15\":\"20171021235959\",\"CON-01\":\"13\",\"CON-02\":\"Out of Netwo\",\"CON-13\":\"20170724103300\"},{\"CON-11\":\"Healthix App\",\"CON-03\":\"Perceptive Content Scan\",\"CON-01\":\"14\",\"CON-02\":\"Healthix Con\",\"CON-13\":\"20190226132400\"},{\"CON-11\":\"Received\",\"CON-01\":\"15\",\"CON-02\":\"CEAuthSc\",\"CON-13\":\"20170320172000\"},{\"CON-11\":\"Received\",\"CON-15\":\"20180327235959\",\"CON-01\":\"16\",\"CON-02\":\"op gen cnsnt\",\"CON-13\":\"20170328144200\"},{\"CON-11\":\"Received\",\"CON-15\":\"20180327235959\",\"CON-01\":\"17\",\"CON-02\":\"Private Phys\",\"CON-13\":\"20170328144200\"},{\"CON-11\":\"Received\",\"CON-15\":\"20180327235959\",\"CON-01\":\"18\",\"CON-02\":\"op gen cnsnt\",\"CON-13\":\"20170328144300\"},{\"CON-11\":\"Received\",\"CON-15\":\"20180327235959\",\"CON-01\":\"19\",\"CON-02\":\"Contract Phy\",\"CON-13\":\"20170328144300\"},{\"CON-11\":\"Received\",\"CON-03\":\"Perceptive Content Scan\",\"CON-01\":\"20\",\"CON-02\":\"ADLW\",\"CON-13\":\"20171107\"},{\"CON-03\":\"TEST CRM\",\"CON-01\":\"21\",\"CON-02\":\"POA\",\"CON-13\":\"20180321\"},{\"CON-11\":\"Received\",\"CON-15\":\"20190607235959\",\"CON-01\":\"22\",\"CON-02\":\"op gen cnsnt\",\"CON-13\":\"20180608101200\"},{\"CON-11\":\"Received\",\"CON-15\":\"20190607235959\",\"CON-01\":\"23\",\"CON-02\":\"Private Phys\",\"CON-13\":\"20180608101200\"},{\"CON-11\":\"Not Recv\",\"CON-01\":\"24\",\"CON-02\":\"Fin Dis Cros\"},{\"CON-11\":\"Received\",\"CON-03\":\"Perceptive Content Scan\",\"CON-01\":\"25\",\"CON-02\":\"ADLW\",\"CON-13\":\"20190226\"},{\"CON-03\":\"Perceptive Content Scan\",\"CON-01\":\"26\",\"CON-02\":\"Clinical Pho\",\"CON-13\":\"20190501\"}],\"PROCEDURE\":[{\"PR1\":{\"PR1-01\":\"1\",\"PR1-06\":\"A\",\"PR1-17\":\"1\",\"PR1-18\":[{\"CE_0417-01\":\"0\"}],\"PR1-05\":{\"TS-01\":\"20190816015318\"},\"PR1-14\":\"0\"},\"ROL\":[{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"1\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1178\",\"XTN-07\":\"6061178\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)772-6389\",\"XTN-07\":\"7726389\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170222\"},\"ROL-04\":[{\"XCN-04\":\"F\",\"XCN-02\":{\"FN-01\":\"WARREN\"},\"XCN-03\":\"RUSSELL\",\"XCN-01\":\"61\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"2\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1060\",\"XTN-07\":\"6061060\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)794-2543\",\"XTN-07\":\"7942543\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170330\"},\"ROL-04\":[{\"XCN-04\":\"K\",\"XCN-02\":{\"FN-01\":\"MAGID\"},\"XCN-03\":\"STEVEN\",\"XCN-01\":\"72\"}]}]}],\"OBX\":[{\"OBX-01\":\"1\",\"OBX-12\":{\"TS-01\":\"20190816012208\"},\"OBX-11\":\"D\",\"OBX-03\":{\"CE-01\":\"HT\",\"CE-02\":\"HEIGHT\"},\"OBX-14\":{\"TS-01\":\"20190606\"},\"OBX-02\":\"NM\",\"OBX-05\":[{\"OBX-05\":\"53.54\"}],\"OBX-06\":{\"CE-01\":\"in\"},\"OBX-08\":\"AA\",\"OBX-19\":{\"TS-01\":\"20190816012221\"},\"OBX-10\":\"A\"},{\"OBX-01\":\"2\",\"OBX-12\":{\"TS-01\":\"20190816012234\"},\"OBX-11\":\"N\",\"OBX-03\":{\"CE-01\":\"WT\",\"CE-02\":\"WEIGHT\"},\"OBX-14\":{\"TS-01\":\"20190606\"},\"OBX-02\":\"NM\",\"OBX-05\":[{\"OBX-05\":\"114\"}],\"OBX-06\":{\"CE-01\":\"lb\"},\"OBX-08\":\"B\",\"OBX-19\":{\"TS-01\":\"20190816012243\"},\"OBX-10\":\"N\"}],\"UB2\":{\"UB2-01\":\"1\"},\"GT1\":[{\"GT1-05\":[{\"XAD-09\":\"NEW YORK\",\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"1 MAIN STREET\"}}],\"GT1-06\":[{\"XTN-01\":\"(914)269-4886\",\"XTN-07\":\"2694886\",\"XTN-06\":\"914\"}],\"GT1-17\":[{\"XAD-06\":\"US\"}],\"GT1-03\":[{\"XPN-02\":\"DONOTUSE\",\"XPN-01\":{\"FN-01\":\"ALISHA\"}}],\"GT1-01\":\"1\",\"GT1-12\":\"112-35-8687\",\"GT1-02\":[{\"CX-01\":\"139860\"}],\"GT1-10\":\"P\/F\",\"GT1-11\":{\"CE_0063-01\":\"SLF\"},\"GT1-20\":\"Full\",\"GT1-09\":\"F\",\"GT1-08\":{\"TS-01\":\"19930409\"}}],\"UB1\":{\"UB1-18\":\"20190816010416\",\"UB1-19\":\"20190809010422\",\"UB1-14\":\"20190816010411\",\"UB1-15\":\"20190816010413\",\"UB1-01\":\"1\"},\"AL1\":[{\"AL1-01\":{\"CE-01\":\"1\"},\"AL1-02\":{\"CE_0127-01\":\"Drug Class\"},\"AL1-03\":{\"CE-02\":\"NO ALLERGY INFORMATION AVAILABLE\"},\"AL1-04\":{\"CE_0128-01\":\"MI\"},\"AL1-06\":\"20190816012324\"}],\"INSURANCE\":[{\"IN2\":{\"IN2-05\":[\"Payor Plan\"],\"IN2-02\":\"112-35-8687\",\"IN2-61\":{\"CX-01\":\"A111111111\"}},\"IN1\":{\"IN1-02\":{\"CE_0072-01\":\"102401\",\"CE_0072-02\":\"BCBS CT\"},\"IN1-35\":\"16326\",\"IN1-01\":\"1\",\"IN1-12\":\"20160401\",\"IN1-22\":\"3\",\"IN1-43\":\"F\",\"IN1-17\":{\"CE_0063-01\":\"Self\"},\"IN1-05\":[{\"XAD-04\":\"NY\",\"XAD-05\":\"10008\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"BOX 3877\"}}],\"IN1-16\":[{\"XPN-02\":\"DONOTUSE\",\"XPN-01\":{\"FN-01\":\"ALISHA\"}}],\"IN1-04\":[{\"XON-01\":\"BLUE CROSS BLUE SHIELD CT\"}],\"IN1-26\":\"20160401160842\",\"IN1-03\":[{\"CX-01\":\"1024\"}],\"IN1-25\":\"YES\",\"IN1-36\":\"A111111111\",\"IN1-47\":\"BOTH\",\"IN1-19\":[{\"XAD-09\":\"NEW YORK\",\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"1 MAIN STREET\"}}],\"IN1-18\":{\"TS-01\":\"19930409\"}},\"ROL\":[{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"1\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1178\",\"XTN-07\":\"6061178\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)772-6389\",\"XTN-07\":\"7726389\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170222\"},\"ROL-04\":[{\"XCN-04\":\"F\",\"XCN-02\":{\"FN-01\":\"WARREN\"},\"XCN-03\":\"RUSSELL\",\"XCN-01\":\"61\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"2\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1060\",\"XTN-07\":\"6061060\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)794-2543\",\"XTN-07\":\"7942543\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170330\"},\"ROL-04\":[{\"XCN-04\":\"K\",\"XCN-02\":{\"FN-01\":\"MAGID\"},\"XCN-03\":\"STEVEN\",\"XCN-01\":\"72\"}]}],\"IN3\":[{\"IN3-05\":{\"MOP-01\":\"AT\"},\"IN3-06\":{\"TS-01\":\"20190816013005\"},\"IN3-07\":{\"TS-01\":\"20190816013008\"},\"IN3-01\":\"3\",\"IN3-13\":{\"TS-01\":\"20190816013018\"},\"IN3-04\":\"N\",\"IN3-20\":[{\"PCF-01\":\"ER\"}],\"IN3-10\":\"20190816013012\",\"IN3-11\":{\"DTN-01\":\"AP\"},\"IN3-22\":\"20190816013030\",\"IN3-09\":\"20190816013010\"}]}],\"PID\":{\"PID-05\":[{\"XPN-06\":\"MD\",\"XPN-05\":\"DR\",\"XPN-07\":\"AL\",\"XPN-02\":\"CLARK\",\"XPN-01\":{\"FN-01\":\"KENT\"},\"XPN-04\":\"SR\",\"XPN-03\":\"SUPERMAN\"},{\"XPN-06\":\"MD\",\"XPN-05\":\"DR\",\"XPN-07\":\"AL\",\"XPN-02\":\"CLARK\",\"XPN-01\":{\"FN-01\":\"KENT\"},\"XPN-04\":\"SR\",\"XPN-03\":\"SUPERMAN\"},{\"XPN-06\":\"MD\",\"XPN-05\":\"DR\",\"XPN-07\":\"AL\",\"XPN-02\":\"CLARK\",\"XPN-01\":{\"FN-01\":\"KENT\"},\"XPN-04\":\"SR\",\"XPN-03\":\"SUPERMAN\"}],\"PID-16\":{\"CE_0002-01\":\"MARRIED\"},\"PID-27\":{\"CE_0172-01\":\"Y\"},\"PID-15\":{\"CE_0296-01\":\"ENG\"},\"PID-03\":[{\"CX-01\":\"5009957\",\"CX-04\":{\"HD-01\":\"MR\"},\"CX-05\":\"MR\"},{\"CX-01\":\"E17991\",\"CX-04\":{\"HD-01\":\"EPIC\"},\"CX-05\":\"MRN\"}],\"PID-14\":[{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"}],\"PID-13\":[{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)555-0145\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)555-0145\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)555-0145\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"PH\",\"XTN-04\":\"123@email.com\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"PH\",\"XTN-09\":\"home\",\"XTN-07\":\"(121)774-7212\",\"XTN-08\":\"121\",\"XTN-05\":\"212\",\"XTN-06\":\"123\"},{\"XTN-03\":\"CP\",\"XTN-01\":\"(914)269-4886\",\"XTN-02\":\"CP\",\"XTN-07\":\"2694886\",\"XTN-05\":\"1\",\"XTN-06\":\"914\"},{\"XTN-03\":\"Internet\",\"XTN-04\":\"tuckera@hss.edu\",\"XTN-02\":\"NET\"}],\"PID-24\":\"N\",\"PID-01\":\"1\",\"PID-12\":\"KS\",\"PID-23\":\"NJ\",\"PID-11\":[{\"XAD-06\":\"US\",\"XAD-07\":\"L\",\"XAD-04\":\"KANSAS\",\"XAD-05\":\"66605\",\"XAD-03\":\"SMALLVILLE\",\"XAD-01\":{\"SAD-01\":\"15 HICKORY LANE\"}},{\"XAD-06\":\"US\",\"XAD-07\":\"L\",\"XAD-04\":\"KS\",\"XAD-05\":\"66605\",\"XAD-03\":\"SMALLVILLE\",\"XAD-01\":{\"SAD-01\":\"15 HICKORY LANE\"}},{\"XAD-06\":\"US\",\"XAD-07\":\"L\",\"XAD-04\":\"KS\",\"XAD-05\":\"66605\",\"XAD-03\":\"SMALLVILLE\",\"XAD-01\":{\"SAD-01\":\"15 HICKORY LANE\"}},{\"XAD-09\":\"KS\",\"XAD-06\":\"US\",\"XAD-07\":\"L\",\"XAD-04\":\"KS\",\"XAD-05\":\"66605\",\"XAD-03\":\"SMALLVILLE\",\"XAD-01\":{\"SAD-01\":\"15 HICKORY LANE\"}},{\"XAD-09\":\"KS\",\"XAD-06\":\"US\",\"XAD-07\":\"L\",\"XAD-04\":\"KS\",\"XAD-05\":\"66605\",\"XAD-03\":\"SMALLVILLE\",\"XAD-01\":{\"SAD-01\":\"15 HICKORY LANE\"}}],\"PID-22\":[{\"CE_0189-01\":\"NOT HISPANIC\"}],\"PID-10\":[{\"CE_0005-01\":\"2106-3\"},{\"CE_0005-01\":\"2106-3\"},{\"CE_0005-01\":\"Other\"}],\"PID-20\":{\"DLN-01\":\"123548956\"},\"PID-08\":\"M\",\"PID-19\":\"112-35-8687\",\"PID-07\":{\"TS-01\":\"19930409\"},\"PID-18\":{\"CX-01\":\"200081549\"},\"PID-06\":[{\"XPN-01\":{\"FN-01\":\"CLARK\"}}],\"PID-17\":{\"CE_0006-01\":\"AMISH\"},\"PID-30\":\"N\"},\"PV1\":{\"PV1-41\":\"HOV*Comp\",\"PV1-04\":\"EL\",\"PV1-15\":[\"A2\"],\"PV1-05\":{\"CX-01\":\"12356489\"},\"PV1-02\":\"OUTPATIENT\",\"PV1-03\":{\"PL-01\":\"RADEXC\",\"PL-04\":{\"HD-01\":\"MAINH\"}},\"PV1-14\":\"Phys\/Clinic\",\"PV1-36\":\"DH\",\"PV1-44\":{\"TS-01\":\"20190814133609\"},\"PV1-01\":\"1\",\"PV1-45\":[{\"TS-01\":\"20190814140400\"}],\"PV1-20\":[{\"FC-01\":\"COMM\"}],\"PV1-08\":[{\"XCN-04\":\"IN SYSTEM\",\"XCN-02\":{\"FN-01\":\"PROVIDER\"},\"XCN-03\":\"NOT\",\"XCN-01\":\"E9999999\"}],\"PV1-19\":{\"CX-01\":\"216918938\"},\"PV1-07\":[{\"XCN-04\":\"IN SYSTEM\",\"XCN-02\":{\"FN-01\":\"PROVIDER\"},\"XCN-03\":\"NOT\",\"XCN-01\":\"E9999999\"}]},\"PV2\":{\"PV2-17\":\"20190816011241\",\"PV2-14\":\"20190816011239\",\"PV2-12\":\"Hospital Encounter\",\"PV2-22\":\"N\",\"PV2-21\":\"F\",\"PV2-09\":{\"TS-01\":\"20190816011236\"},\"PV2-08\":{\"TS-01\":\"20190814133609\"},\"PV2-19\":\"N\",\"PV2-07\":[\"HO\"],\"PV2-18\":\"CH\"},\"ROL\":[{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"1\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1178\",\"XTN-07\":\"6061178\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)772-6389\",\"XTN-07\":\"7726389\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170222\"},\"ROL-04\":[{\"XCN-04\":\"F\",\"XCN-02\":{\"FN-01\":\"WARREN\"},\"XCN-03\":\"RUSSELL\",\"XCN-01\":\"61\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"2\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1060\",\"XTN-07\":\"6061060\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)794-2543\",\"XTN-07\":\"7942543\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170330\"},\"ROL-04\":[{\"XCN-04\":\"K\",\"XCN-02\":{\"FN-01\":\"MAGID\"},\"XCN-03\":\"STEVEN\",\"XCN-01\":\"72\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"3\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1909\",\"XTN-07\":\"6061909\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)879-6526\",\"XTN-07\":\"8796526\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20171206\"},\"ROL-04\":[{\"XCN-04\":\"W\",\"XCN-02\":{\"FN-01\":\"ALTCHEK\"},\"XCN-03\":\"DAVID\",\"XCN-01\":\"161\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"4\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1932\",\"XTN-07\":\"6061932\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(999)999-9999\",\"XTN-07\":\"9999999\",\"XTN-06\":\"999\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170331\"},\"ROL-04\":[{\"XCN-04\":\"P\",\"XCN-02\":{\"FN-01\":\"FIGGIE\"},\"XCN-03\":\"MARK\",\"XCN-01\":\"162\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"5\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1329\",\"XTN-07\":\"6061329\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)570-6147\",\"XTN-07\":\"5706147\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160429\"},\"ROL-04\":[{\"XCN-04\":\"C\",\"XCN-02\":{\"FN-01\":\"HALPERN\"},\"XCN-03\":\"BRIAN\",\"XCN-01\":\"220\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"6\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1686\",\"XTN-07\":\"6061686\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-2196\",\"XTN-07\":\"7742196\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Anesthesiolo\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180608\"},\"ROL-04\":[{\"XCN-04\":\"A\",\"XCN-02\":{\"FN-01\":\"WALDMAN\"},\"XCN-03\":\"SETH\",\"XCN-01\":\"244\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"7\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1798\",\"XTN-07\":\"6061798\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-2600\",\"XTN-07\":\"7742600\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160406\"},\"ROL-04\":[{\"XCN-04\":\"S\",\"XCN-02\":{\"FN-01\":\"SANDHU\"},\"XCN-03\":\"HARVINDER\",\"XCN-01\":\"279\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"8\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)554-2878\",\"XTN-07\":\"5542878\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(866)617-6509\",\"XTN-07\":\"6176509\",\"XTN-06\":\"866\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4099\",\"XAD-02\":\"7TH FL\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"523 E 72ND STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180629\"},\"ROL-04\":[{\"XCN-04\":\"D\",\"XCN-02\":{\"FN-01\":\"PEARLE\"},\"XCN-03\":\"ANDREW\",\"XCN-01\":\"636\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"9\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1469\",\"XTN-07\":\"6061469\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)327-1417\",\"XTN-07\":\"3271417\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20161014\"},\"ROL-04\":[{\"XCN-04\":\"A\",\"XCN-02\":{\"FN-01\":\"HANNAFIN\"},\"XCN-03\":\"JO\",\"XCN-01\":\"707\"}],\"ROL-06\":{\"TS-01\":\"20161014\"}},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"10\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)774-2515\",\"XTN-07\":\"7742515\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-2918\",\"XTN-07\":\"7742918\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4099\",\"XAD-02\":\"2ND FL\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"523 E 72ND STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20171206\"},\"ROL-04\":[{\"XCN-04\":\"E\",\"XCN-02\":{\"FN-01\":\"CUNNINGHAM\"},\"XCN-03\":\"MATTHEW\",\"XCN-01\":\"1141\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"11\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1440\",\"XTN-07\":\"6061440\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-7190\",\"XTN-07\":\"7747190\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170719\"},\"ROL-04\":[{\"XCN-04\":\"T\",\"XCN-02\":{\"FN-01\":\"FUFA\"},\"XCN-03\":\"DURETTI\",\"XCN-01\":\"1638\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"12\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)774-2837\",\"XTN-07\":\"7742837\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(646)797-8428\",\"XTN-07\":\"7978428\",\"XTN-06\":\"646\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180321\"},\"ROL-04\":[{\"XCN-04\":\"JO\",\"XCN-02\":{\"FN-01\":\"KIM\"},\"XCN-03\":\"HAN\",\"XCN-01\":\"1650\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"13\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1620\",\"XTN-07\":\"6061620\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)606-1605\",\"XTN-07\":\"6061605\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160425\"},\"ROL-04\":[{\"XCN-04\":\"J\",\"XCN-02\":{\"FN-01\":\"KOLLAKUZHIYIL\"},\"XCN-03\":\"MARY\",\"XCN-01\":\"1806\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"14\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)774-7659\",\"XTN-07\":\"7747659\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-7627\",\"XTN-07\":\"7747627\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170726\"},\"ROL-04\":[{\"XCN-02\":{\"FN-01\":\"LEALI\"},\"XCN-03\":\"ALEJANDRO\",\"XCN-01\":\"1842\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"15\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1461\",\"XTN-07\":\"6061461\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-2734\",\"XTN-07\":\"7742734\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180215\"},\"ROL-04\":[{\"XCN-04\":\"B\",\"XCN-02\":{\"FN-01\":\"LEVINE\"},\"XCN-03\":\"ALANA\",\"XCN-01\":\"3049\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"16\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1744\",\"XTN-07\":\"6061744\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(646)714-6755\",\"XTN-07\":\"7146755\",\"XTN-06\":\"646\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"NP\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160429\"},\"ROL-04\":[{\"XCN-04\":\"A\",\"XCN-02\":{\"FN-01\":\"DONOHUE\"},\"XCN-03\":\"PATRICIA\",\"XCN-01\":\"3130\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"17\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)774-7180\",\"XTN-07\":\"7747180\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)774-7347\",\"XTN-07\":\"7747347\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170116\"},\"ROL-04\":[{\"XCN-04\":\"A\",\"XCN-02\":{\"FN-01\":\"JERABEK\"},\"XCN-03\":\"SETH\",\"XCN-01\":\"3189\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"18\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(646)714-6013\",\"XTN-07\":\"7146013\",\"XTN-06\":\"646\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)606-1605\",\"XTN-07\":\"6061605\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"NP\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180823\"},\"ROL-04\":[{\"XCN-04\":\"A\",\"XCN-02\":{\"FN-01\":\"SCORZIELLO\"},\"XCN-03\":\"BARBARA\",\"XCN-01\":\"3482\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"19\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)774-2944\",\"XTN-07\":\"7742944\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(646)797-8551\",\"XTN-07\":\"7978551\",\"XTN-06\":\"646\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160509\"},\"ROL-04\":[{\"XCN-04\":\"S\",\"XCN-02\":{\"FN-01\":\"GRIFFIN\"},\"XCN-03\":\"ROBERT\",\"XCN-01\":\"3499\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"20\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1466\",\"XTN-07\":\"6061466\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)606-1477\",\"XTN-07\":\"6061477\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4898\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH ST\"}}],\"ROL-03\":{\"CE_0443-01\":\"Fellow\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20180628\"},\"ROL-04\":[{\"XCN-04\":\"S\",\"XCN-02\":{\"FN-01\":\"MCLAWHORN\"},\"XCN-03\":\"ALEXANDER\",\"XCN-01\":\"5140\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"21\"},\"ROL-03\":{\"CE_0443-01\":\"PT\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170724\"},\"ROL-04\":[{\"XCN-04\":\"M\",\"XCN-02\":{\"FN-01\":\"BAKER\"},\"XCN-03\":\"SARAH\",\"XCN-01\":\"51000016\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"22\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(555)555-5555\",\"XTN-07\":\"5555555\",\"XTN-06\":\"555\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)717-0156\",\"XTN-07\":\"7170156\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-09\":\"DANE\",\"XAD-04\":\"WI\",\"XAD-05\":\"53711\",\"XAD-03\":\"MADISON\",\"XAD-01\":{\"SAD-01\":\"123 ANYWHERE STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Referring MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170331\"},\"ROL-04\":[{\"XCN-02\":{\"FN-01\":\"FAMILY MEDICINE\"},\"XCN-03\":\"PHYSICIAN\",\"XCN-01\":\"E1000\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"23\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(555)555-5555\",\"XTN-07\":\"5555555\",\"XTN-06\":\"555\"}],\"ROL-11\":[{\"XAD-09\":\"DANE\",\"XAD-04\":\"WI\",\"XAD-05\":\"53711\",\"XAD-03\":\"MADISON\",\"XAD-01\":{\"SAD-01\":\"123 ANYWHERE STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Surgeon\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160401\"},\"ROL-04\":[{\"XCN-02\":{\"FN-01\":\"ORTHOPEDICS\"},\"XCN-03\":\"PHYSICIAN\",\"XCN-01\":\"E1007\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"24\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(555)555-5555\",\"XTN-07\":\"5555555\",\"XTN-06\":\"555\"}],\"ROL-11\":[{\"XAD-09\":\"DANE\",\"XAD-04\":\"WI\",\"XAD-05\":\"53593\",\"XAD-03\":\"VERONA\",\"XAD-01\":{\"SAD-01\":\"123 ANYWHERE STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20170426\"},\"ROL-04\":[{\"XCN-02\":{\"FN-01\":\"INTERNAL MEDICINE\"},\"XCN-03\":\"PHYSICIAN\",\"XCN-01\":\"E1051\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"25\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(555)555-5555\",\"XTN-07\":\"5555555\",\"XTN-06\":\"555\"}],\"ROL-11\":[{\"XAD-09\":\"DANE\",\"XAD-04\":\"WI\",\"XAD-05\":\"53593\",\"XAD-03\":\"VERONA\",\"XAD-01\":{\"SAD-01\":\"123 ANYWHERE STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"NP\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20160512\"},\"ROL-04\":[{\"XCN-02\":{\"FN-01\":\"FAMILY MEDICINE\"},\"XCN-03\":\"NP\",\"XCN-01\":\"E400103\"}]},{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"26\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)988-6600\",\"XTN-07\":\"9886600\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)988-6602\",\"XTN-07\":\"9886602\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-09\":\"NEW YORK\",\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"101 E 78TH ST\"}}],\"ROL-03\":{\"CE_0443-01\":\"GENERAL\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20150916\"},\"ROL-04\":[{\"XCN-04\":\"N\",\"XCN-02\":{\"FN-01\":\"BORNSTEIN\"},\"XCN-03\":\"HAROLD\",\"XCN-01\":\"R1000154\"}],\"ROL-06\":{\"TS-01\":\"20190127\"},\"ROL-09\":[{\"CE-01\":\"GENERAL\"}]}],\"ZPD\":{\"ZPD-09\":\"N\",\"ZPD-21\":\"F\",\"ZPD-20\":\"M\",\"ZPD-04\":\"ACTIVATED\",\"ZPD-02\":\"Email\",\"ZPD-07\":\"N\"},\"DG1\":[{\"DG1-09\":\"N\",\"DG1-11\":{\"CE_0083-01\":\"C\"},\"DG1-01\":\"1\",\"DG1-15\":\"0\",\"DG1-06\":\"A\",\"DG1-17\":\"D\",\"DG1-05\":{\"TS-01\":\"20190816012416\"},\"DG1-19\":{\"TS-01\":\"20190816012501\"},\"DG1-18\":\"N\"}],\"ROLE\":[{\"ROL\":{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"1\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1932\",\"XTN-07\":\"6061932\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(999)999-9999\",\"XTN-07\":\"9999999\",\"XTN-06\":\"999\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"GENERAL\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20190111\"},\"ROL-04\":[{\"XCN-04\":\"P\",\"XCN-02\":{\"FN-01\":\"FIGGIE\"},\"XCN-03\":\"MARK\",\"XCN-01\":\"162\"}],\"ROL-09\":[{\"CE-01\":\"GENERAL\"}]}},{\"ROL\":{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"2\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(212)606-1620\",\"XTN-07\":\"6061620\",\"XTN-06\":\"212\"},{\"XTN-03\":\"FX\",\"XTN-01\":\"(212)606-1605\",\"XTN-07\":\"6061605\",\"XTN-06\":\"212\"}],\"ROL-11\":[{\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"10021-4823\",\"XAD-03\":\"NEW YORK\",\"XAD-01\":{\"SAD-01\":\"535 E 70TH STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"Consult MD\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20190115\"},\"ROL-04\":[{\"XCN-04\":\"L\",\"XCN-02\":{\"FN-01\":\"BUCHALTER\"},\"XCN-03\":\"MATTHEW\",\"XCN-01\":\"1872\"}]}},{\"ROL\":{\"ROL-10\":{\"CE_0406-01\":\"INTERNAL\"},\"ROL-01\":{\"EI-01\":\"3\"},\"ROL-12\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(555)555-5555\",\"XTN-07\":\"5555555\",\"XTN-06\":\"555\"}],\"ROL-11\":[{\"XAD-09\":\"DANE\",\"XAD-04\":\"WI\",\"XAD-05\":\"53593\",\"XAD-03\":\"VERONA\",\"XAD-01\":{\"SAD-01\":\"123 ANYWHERE STREET\"}}],\"ROL-03\":{\"CE_0443-01\":\"RN\"},\"ROL-02\":\"UP\",\"ROL-05\":{\"TS-01\":\"20190117\"},\"ROL-04\":[{\"XCN-04\":\"NURSE\",\"XCN-02\":{\"FN-01\":\"BEACON\"},\"XCN-03\":\"OP\",\"XCN-01\":\"E400021\"}]}}],\"DB1\":[{\"DB1-08\":\"20190816012010\",\"DB1-06\":\"20190816011949\",\"DB1-07\":\"20190816012005\",\"DB1-01\":\"1\",\"DB1-04\":\"N\",\"DB1-05\":\"20190816011945\",\"DB1-02\":\"AP\"}],\"NK1\":[{\"NK1-07\":{\"CE_0131-01\":\"Emergency Contact 1\"},\"NK1-02\":[{\"XPN-02\":\"NO\",\"XPN-01\":{\"FN-01\":\"CONTACT\"}}],\"NK1-01\":\"1\",\"NK1-04\":[{\"XAD-06\":\"US\"}],\"NK1-03\":{\"CE_0063-01\":\"Spouse\"},\"NK1-05\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(000)000-0000\",\"XTN-07\":\"0000000\",\"XTN-06\":\"000\"}]}],\"DRG\":{\"DRG-08\":\"C\",\"DRG-05\":{\"CE_0083-01\":\"C\"},\"DRG-02\":{\"TS-01\":\"20190816012539\"},\"DRG-03\":\"N\",\"DRG-11\":\"E\",\"DRG-01\":{\"CE_0055-01\":\"1\"},\"DRG-10\":\"N\"},\"EVN\":{\"EVN-04\":\"REG_PAT_NEW\",\"EVN-05\":[{\"XCN-02\":{\"FN-01\":\"JOE\"},\"XCN-03\":\"COFFEE\",\"XCN-14\":{\"HD-01\":\"MAINH\"},\"XCN-09\":{\"HD-01\":\"HSS10\"}}],\"EVN-02\":{\"TS-01\":\"20190701072503\"},\"EVN-03\":{\"TS-01\":\"20190820200138\"},\"EVN-01\":\"A28\"},\"PD1\":{\"PD1-08\":\"N\",\"PD1-09\":\"A\",\"PD1-11\":{\"CE_0215-01\":\"20190820210022\"},\"PD1-01\":[\"C\"],\"PD1-12\":\"AUSA\",\"PD1-02\":\"A\",\"PD1-13\":\"E1... E9\",\"PD1-03\":[{\"XON-01\":\"DR. MICHAEL CROSS' PRACTICE AT THE HSS PAVILION\",\"XON-03\":\"1041002\"}],\"PD1-14\":[{\"XON-01\":\"ACT\"}],\"PD1-04\":[{\"XCN-04\":\"IN SYSTEM\",\"XCN-02\":{\"FN-01\":\"PROVIDER\"},\"XCN-03\":\"NOT\",\"XCN-01\":\"E9999999\"}],\"PD1-06\":\"320190820202440\",\"PD1-07\":\"CHURCH\",\"PD1-10\":[{\"CX-01\":\"20190820210020\"}]}}},\"Id\":\"ADT_A28\",\"Name\":\"ADT_A28\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="A31" format="json">
+      <types:shape format="weave" example="examples/A31_input.json"><![CDATA[%dw 2.0
+
+type A31 = {|
+  Delimiters: String, 
+  Errors: Array<{|    errorType: {|  |},     errorCode: String,     fatal: Boolean,     errorText: String,     segment: Number {"typeId": "int"}  |}>, 
+  MSH: {|
+    "MSH-10": String, 
+    "MSH-11": {| "PT-01": String |}, 
+    "MSH-12": {| "VID-01": String |}, 
+    "MSH-03": {| "HD-01": String |}, 
+    "MSH-04": {| "HD-01": String |}, 
+    "MSH-07": {| "TS-01": String |}, 
+    "MSH-08": String, 
+    "MSH-09": {|
+      "MSG-02": String, 
+      "MSG-01": String
+    |}
+  |}, 
+  ACK: {|
+    MSH: {|
+      "MSH-10": String, 
+      "MSH-11": {| "PT-01": String |}, 
+      "MSH-12": {| "VID-01": String |}, 
+      "MSH-03": {| "HD-01": String |}, 
+      "MSH-04": {| "HD-01": String |}, 
+      "MSH-05": {| "HD-01": String |}, 
+      "MSH-06": {| "HD-01": String |}, 
+      "MSH-07": {| "TS-01": String |}, 
+      "MSH-08": String, 
+      "MSH-09": {|
+        "MSG-03": String, 
+        "MSG-02": String, 
+        "MSG-01": String
+      |}
+    |}, 
+    ERR: Array<{|      "ERR-01": Array<{|        "ELD-04": {|          "CE-01": String,           "CE-02": String,           "CE-03": String        |},         "ELD-01": String,         "ELD-02": Number {"typeId": "int"}      |}>
+    |}>, 
+    MSA: {|
+      "MSA-02": String, 
+      "MSA-01": String
+    |}
+  |}, 
+  Data: {|
+    ADT_A31: {|
+      MSH: {|
+        "MSH-10": String, 
+        "MSH-11": {| "PT-01": String |}, 
+        "MSH-12": {| "VID-01": String |}, 
+        "MSH-03": {| "HD-01": String |}, 
+        "MSH-04": {| "HD-01": String |}, 
+        "MSH-07": {| "TS-01": String |}, 
+        "MSH-08": String, 
+        "MSH-09": {|
+          "MSG-02": String, 
+          "MSG-01": String
+        |}
+      |}, 
+      GT1: Array<{|        "GT1-05": Array<{|          "XAD-09": String,           "XAD-06": String,           "XAD-04": String,           "XAD-05": String,           "XAD-03": String,           "XAD-01": {| "SAD-01": String |}        |}>, 
+        "GT1-06": Array<{|          "XTN-01": String,           "XTN-07": String,           "XTN-06": String        |}>, 
+        "GT1-03": Array<{|          "XPN-02": String,           "XPN-01": {| "FN-01": String |}        |}>, 
+        "GT1-01": String, 
+        "GT1-02": Array<{| "CX-01": String |}>, 
+        "GT1-10": String, 
+        "GT1-11": {| "CE_0063-01": String |}
+      |}>, 
+      AL1: Array<{|        "AL1-01": {| "CE-01": String |},         "AL1-02": {| "CE_0127-01": String |},         "AL1-03": {| "CE-02": String |}      |}>, 
+      PID: {|
+        "PID-05": Array<{|          "XPN-02": String,           "XPN-01": {| "FN-01": String |}        |}>, 
+        "PID-16": {| "CE_0002-01": String |}, 
+        "PID-03": Array<{|          "CX-01": String,           "CX-04": {| "HD-01": String |},           "CX-05": String        |}>, 
+        "PID-13": Array<{|          "XTN-03": String,           "XTN-01": String,           "XTN-02": String,           "XTN-07": String,           "XTN-05": String,           "XTN-06": String,           "XTN-04": String,           "XTN-09": String        |}>, 
+        "PID-01": String, 
+        "PID-12": String, 
+        "PID-11": Array<{|          "XAD-09": String,           "XAD-06": String,           "XAD-07": String,           "XAD-04": String,           "XAD-05": String,           "XAD-03": String,           "XAD-01": {| "SAD-01": String |}        |}>, 
+        "PID-30": String, 
+        "PID-08": String, 
+        "PID-19": String, 
+        "PID-07": {| "TS-01": String |}, 
+        "PID-17": {| "CE_0006-01": String |}
+      |}, 
+      PV1: {|
+        "PV1-02": String, 
+        "PV1-01": String
+      |}, 
+      EVN: {|
+        "EVN-04": String, 
+        "EVN-05": Array<{|          "XCN-02": {| "FN-01": String |},           "XCN-03": String        |}>, 
+        "EVN-02": {| "TS-01": String |}, 
+        "EVN-01": String
+      |}, 
+      PD1: {|
+        "PD1-03": Array<{|          "XON-01": String,           "XON-03": String        |}>
+      |}, 
+      PV2: {| "PV2-22": String |}
+    |}
+  |}, 
+  Id: String, 
+  Name: String
+|} {"example": "{\"Delimiters\":\"|^~\\\\&\",\"Errors\":[{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"unknown segment\",\"segment\":2},{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"unknown segment\",\"segment\":3},{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"unknown segment\",\"segment\":4},{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"unknown segment\",\"segment\":5},{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"unknown segment\",\"segment\":6},{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"unknown segment\",\"segment\":7},{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"unknown segment\",\"segment\":8},{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"unknown segment\",\"segment\":9},{\"errorType\":{},\"errorCode\":\"100\",\"fatal\":false,\"errorText\":\"unknown segment\",\"segment\":2}],\"MSH\":{\"MSH-10\":\"38879061\",\"MSH-11\":{\"PT-01\":\"P\"},\"MSH-12\":{\"VID-01\":\"2.4\"},\"MSH-03\":{\"HD-01\":\"EPIC\"},\"MSH-04\":{\"HD-01\":\"HSS\"},\"MSH-07\":{\"TS-01\":\"20190630222928\"},\"MSH-08\":\"MYCHARTG\",\"MSH-09\":{\"MSG-02\":\"A31\",\"MSG-01\":\"ADT\"}},\"ACK\":{\"MSH\":{\"MSH-10\":\"38879061\",\"MSH-11\":{\"PT-01\":\"P\"},\"MSH-12\":{\"VID-01\":\"2.4\"},\"MSH-03\":{\"HD-01\":\"EPIC\"},\"MSH-04\":{\"HD-01\":\"HSS\"},\"MSH-05\":{\"HD-01\":\"EPIC\"},\"MSH-06\":{\"HD-01\":\"HSS\"},\"MSH-07\":{\"TS-01\":\"20190630222928\"},\"MSH-08\":\"MYCHARTG\",\"MSH-09\":{\"MSG-03\":\"ACK\",\"MSG-02\":\"A31\",\"MSG-01\":\"ACK\"}},\"ERR\":[{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"ZPD\",\"ELD-02\":2}]},{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"CON\",\"ELD-02\":2}]},{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"CON\",\"ELD-02\":3}]},{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"CON\",\"ELD-02\":4}]},{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"CON\",\"ELD-02\":5}]},{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"CON\",\"ELD-02\":6}]},{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"CON\",\"ELD-02\":7}]},{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"CON\",\"ELD-02\":8}]},{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"CON\",\"ELD-02\":9}]},{\"ERR-01\":[{\"ELD-04\":{\"CE-01\":\"100\",\"CE-02\":\"Segment sequence error\",\"CE-03\":\"HL70357\"},\"ELD-01\":\"ZG1\",\"ELD-02\":2}]}],\"MSA\":{\"MSA-02\":\"38879061\",\"MSA-01\":\"AE\"}},\"Data\":{\"ADT_A31\":{\"MSH\":{\"MSH-10\":\"38879061\",\"MSH-11\":{\"PT-01\":\"P\"},\"MSH-12\":{\"VID-01\":\"2.4\"},\"MSH-03\":{\"HD-01\":\"EPIC\"},\"MSH-04\":{\"HD-01\":\"HSS\"},\"MSH-07\":{\"TS-01\":\"20190630222928\"},\"MSH-08\":\"MYCHARTG\",\"MSH-09\":{\"MSG-02\":\"A31\",\"MSG-01\":\"ADT\"}},\"GT1\":[{\"GT1-05\":[{\"XAD-09\":\"NASSAU\",\"XAD-06\":\"US\",\"XAD-04\":\"NY\",\"XAD-05\":\"11111\",\"XAD-03\":\"TOWNTOWN\",\"XAD-01\":{\"SAD-01\":\"231 MAINE STREET\"}}],\"GT1-06\":[{\"XTN-01\":\"(111)111-2211\",\"XTN-07\":\"1112211\",\"XTN-06\":\"111\"}],\"GT1-03\":[{\"XPN-02\":\"DANNY\",\"XPN-01\":{\"FN-01\":\"PETERSON\"}}],\"GT1-01\":\"1\",\"GT1-02\":[{\"CX-01\":\"45741341\"}],\"GT1-10\":\"P\/F\",\"GT1-11\":{\"CE_0063-01\":\"SLF\"}}],\"AL1\":[{\"AL1-01\":{\"CE-01\":\"1\"},\"AL1-02\":{\"CE_0127-01\":\"Drug Class\"},\"AL1-03\":{\"CE-02\":\"NO ALLERGY INFORMATION AVAILABLE\"}}],\"PID\":{\"PID-05\":[{\"XPN-02\":\"DANNY\",\"XPN-01\":{\"FN-01\":\"PETERSON\"}}],\"PID-16\":{\"CE_0002-01\":\"DIVORCED\"},\"PID-03\":[{\"CX-01\":\"333555\",\"CX-04\":{\"HD-01\":\"MR\"},\"CX-05\":\"MR\"}],\"PID-13\":[{\"XTN-03\":\"PH\",\"XTN-01\":\"(111)111-3333\",\"XTN-02\":\"PH\",\"XTN-07\":\"3334444\",\"XTN-05\":\"1\",\"XTN-06\":\"111\"},{\"XTN-03\":\"Internet\",\"XTN-04\":\"EMAIL@gmail.com\",\"XTN-02\":\"NET\",\"XTN-09\":\"daughter: LOST 111-111-3333\"}],\"PID-01\":\"1\",\"PID-12\":\"NASSAU\",\"PID-11\":[{\"XAD-09\":\"NASSAU\",\"XAD-06\":\"US\",\"XAD-07\":\"L\",\"XAD-04\":\"NY\",\"XAD-05\":\"11111\",\"XAD-03\":\"TOWNTOWN\",\"XAD-01\":{\"SAD-01\":\"333 MAINE STREET\"}}],\"PID-30\":\"N\",\"PID-08\":\"M\",\"PID-19\":\"000-00-0000\",\"PID-07\":{\"TS-01\":\"19591030\"},\"PID-17\":{\"CE_0006-01\":\"CATHOLIC\"}},\"PV1\":{\"PV1-02\":\"N\",\"PV1-01\":\"1\"},\"EVN\":{\"EVN-04\":\"REG_PAT_CHANGE\",\"EVN-05\":[{\"XCN-02\":{\"FN-01\":\"MYCHART\"},\"XCN-03\":\"GENERIC\"}],\"EVN-02\":{\"TS-01\":\"20190630222928\"},\"EVN-01\":\"A31\"},\"PD1\":{\"PD1-03\":[{\"XON-01\":\"DR. GEORGE TOWNS'S PRACTICE\",\"XON-03\":\"1111111\"}]},\"PV2\":{\"PV2-22\":\"N\"}}},\"Id\":\"ADT_A31\",\"Name\":\"ADT_A31\"}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#5a4fd574-b118-4dce-b74f-47ded62f5dae"/>
+  <types:enrichment select="#71ee7494-16b8-454b-a1c1-b1c291715154">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="A08"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#11532bdc-6f37-40d2-bfcf-c9304580194d">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="A28"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#f359c82e-dd5b-45e2-8015-b7f33c0a0cf5">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="A31"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#e051064a-c594-43c5-ba20-8e924f9c7dd7">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="A08"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>

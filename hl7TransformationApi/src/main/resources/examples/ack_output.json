@@ -1,0 +1,193 @@
+{
+  "Name": "ACK",
+  "MSH": {
+    "MSH-10": "225971",
+    "MSH-11": {
+      "PT-01": "T"
+    },
+    "MSH-12": {
+      "VID-01": "2.4"
+    },
+    "MSH-03": {
+      "HD-01": "EPIC"
+    },
+    "MSH-04": {
+      "HD-01": "HSS"
+    },
+    "MSH-05": {
+      "HD-01": "EPIC"
+    },
+    "MSH-06": {
+      "HD-01": "HSS"
+    },
+    "MSH-07": {
+      "TS-01": "20190716085715"
+    },
+    "MSH-08": "ORTMD",
+    "MSH-09": {
+      "MSG-03": "ACK",
+      "MSG-02": "A08",
+      "MSG-01": "ACK"
+    }
+  },
+  "Id": "ACK",
+  "Data": {
+    "ACK": {
+      "MSH": {
+        "MSH-10": "225971",
+        "MSH-11": {
+          "PT-01": "T"
+        },
+        "MSH-12": {
+          "VID-01": "2.4"
+        },
+        "MSH-03": {
+          "HD-01": "EPIC"
+        },
+        "MSH-04": {
+          "HD-01": "HSS"
+        },
+        "MSH-05": {
+          "HD-01": "EPIC"
+        },
+        "MSH-06": {
+          "HD-01": "HSS"
+        },
+        "MSH-07": {
+          "TS-01": "20190716085715"
+        },
+        "MSH-08": "ORTMD",
+        "MSH-09": {
+          "MSG-03": "ACK",
+          "MSG-02": "A08",
+          "MSG-01": "ACK"
+        }
+      },
+      "ERR": [
+        {
+          "ERR-01": [
+            {
+              "ELD-04": {
+                "CE-01": "102",
+                "CE-02": "Data type error",
+                "CE-03": "HL70357"
+              },
+              "ELD-01": "PID",
+              "ELD-02": 1,
+              "ELD-03": 16
+            }
+          ]
+        },
+        {
+          "ERR-01": [
+            {
+              "ELD-04": {
+                "CE-01": "102",
+                "CE-02": "Data type error",
+                "CE-03": "HL70357"
+              },
+              "ELD-01": "ZPD",
+              "ELD-02": 1,
+              "ELD-03": 3
+            }
+          ]
+        },
+        {
+          "ERR-01": [
+            {
+              "ELD-04": {
+                "CE-01": "100",
+                "CE-02": "Segment sequence error",
+                "CE-03": "HL70357"
+              },
+              "ELD-01": "OBX",
+              "ELD-02": 2
+            }
+          ]
+        },
+        {
+          "ERR-01": [
+            {
+              "ELD-04": {
+                "CE-01": "100",
+                "CE-02": "Segment sequence error",
+                "CE-03": "HL70357"
+              },
+              "ELD-01": "CON",
+              "ELD-02": 28
+            }
+          ]
+        },
+        {
+          "ERR-01": [
+            {
+              "ELD-04": {
+                "CE-01": "100",
+                "CE-02": "Segment sequence error",
+                "CE-03": "HL70357"
+              },
+              "ELD-01": "CON",
+              "ELD-02": 29
+            }
+          ]
+        },
+        {
+          "ERR-01": [
+            {
+              "ELD-04": {
+                "CE-01": "100",
+                "CE-02": "Segment sequence error",
+                "CE-03": "HL70357"
+              },
+              "ELD-01": "CON",
+              "ELD-02": 30
+            }
+          ]
+        },
+        {
+          "ERR-01": [
+            {
+              "ELD-04": {
+                "CE-01": "100",
+                "CE-02": "Segment sequence error",
+                "CE-03": "HL70357"
+              },
+              "ELD-01": "DG1",
+              "ELD-02": 2
+            }
+          ]
+        },
+        {
+          "ERR-01": [
+            {
+              "ELD-04": {
+                "CE-01": "100",
+                "CE-02": "Segment sequence error",
+                "CE-03": "HL70357"
+              },
+              "ELD-01": "GT1",
+              "ELD-02": 2
+            }
+          ]
+        },
+        {
+          "ERR-01": [
+            {
+              "ELD-04": {
+                "CE-01": "100",
+                "CE-02": "Segment sequence error",
+                "CE-03": "HL70357"
+              },
+              "ELD-01": "ZG1",
+              "ELD-02": 2
+            }
+          ]
+        }
+      ],
+      "MSA": {
+        "MSA-02": "225971",
+        "MSA-01": "AE"
+      }
+    }
+  }
+}

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="A28-sub-flow" doc:id="1231a5a2-33cc-4e5c-9f8d-015599081abc" >
+		<logger level="DEBUG" doc:name="A28PreDataweave" doc:id="1b96c9e4-85ce-4c03-b592-ec45f2805564" />
+		<ee:transform doc:name="A28 Transformation" doc:id="11532bdc-6f37-40d2-bfcf-c9304580194d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+import java!com::hss::utils::Stringify
+output application/java
+var MSH = payload.Data.ADT_A28.MSH
+var PID = payload.Data.ADT_A28.PID
+var ZPD = payload.Data.ADT_A28.ZPD
+var NK1 = payload.Data.ADT_A28.NK1
+var PD1  = payload.Data.ADT_A28.PD1
+var ROL = payload.Data.ADT_A28.ROL1
+var IN1 = payload.Data.ADT_A28.INSURANCE
+var Enub = PID."PID-03"."CX-01"[1]
+var PID3 = Stringify::toString(PID."PID-03") //map ($."CX-01" ++ "," ++ $."CX-04"."HD-01" ++ "," ++ $."CX-05")
+var PID5 = Stringify::toString(PID."PID-05") //map ($."XPN-02" ++ "," ++ $."XPN-01" ++ "," ++ $."XPN-03")
+var GT1 = payload.Data.ADT_A28.GT1 map {
+	data: $,
+	index: $$
+}
+var PID10 = Stringify::toString(PID."PID-10")
+var PID11 = Stringify::toString(PID."PID-11")
+var HOME3 = PID."PID-13" map ($."XTN-03")
+var HOME1 = PID."PID-13" map ($."XTN-01")
+var HOME2 = PID."PID-13" map ($."XTN-02")
+var HOME7 = PID."PID-13" map ($."XTN-07")
+var HOME5 = PID."PID-13" map ($."XTN-05")
+var HOME6 = PID."PID-13" map ($."XTN-06")
+var PHONE = ((HOME3 default[]) ++ (HOME1 default[]) ++ (HOME2 default[]) ++ (HOME7 default[]) ++ (HOME5 default[]) ++ (HOME6 default[]))
+var PID13 = Stringify::toString(PID."PID-13")
+var PID15 = PID."PID-15"."CE_0296-01"
+var PID16 = PID."PID-16"."CE_0002-01"
+var PID17 = PID."PID-17"."CE_0006-01"
+var PID19 = PID."PID-19" default "" replace /(\d){3}-(\d){2}/ with "***-**"
+var PD13 = Stringify::toString(PD1."PD1-03")
+var PD14 = Stringify::toString(PD1."PD1-04")
+var PD16 = Stringify::toString(PD1."PD1-06")
+var ZPD21 = ZPD."ZPD-21"
+var ZPD2 = Stringify::toString(ZPD."ZPD-02")
+var ROLs = Stringify::toString(ROL)
+var NK1s = Stringify::toString(NK1)
+var GT1s = Stringify::toString(GT1)
+var IN1s = Stringify::toString(IN1)
+var PID3_1 = PID."PID-03"."CX-01"[0]
+
+
+
+var INS = Stringify::toString(payload.Data.ADT_A28.INSURANCE map ((value, index) -> 
+	value mapObject(value, key) -> {
+		(key): if ((key) as String == 'IN2') 
+			value mapObject(value, key) -> {
+				(key): if((key) as String == 'IN2-02') value replace /(\d){3}-(\d){2}/ with "***-**" else value
+			} 
+		else 
+			value
+	}
+))
+
+
+
+
+var addresses = (PID."PID-11" filter $$<5 map(value, index) -> 
+	{
+		("HealthCloudGA__Address"++(index+1)++"Line1__c") : value."XAD-01"."SAD-01",
+		("HealthCloudGA__Address"++(index+1)++"Line2__c") : value."XAD-01"."SAD-02" default "",
+		("HealthCloudGA__Address"++(index+1)++"City__c") : value."XAD-03" default "",
+		("HealthCloudGA__Address"++(index+1)++"State__c") : value."XAD-04" default "",
+		("HealthCloudGA__Address"++(index+1)++"PostalCode__c") : value."XAD-05" default "",
+		("HealthCloudGA__Address"++(index+1)++"Country__c") : value."XAD-06" default ""
+	
+	}) reduce ((env, obj={}) -> obj ++ env)
+
+var overflowAddresses = 	(PID."PID-11" filter $$ >= 5)
+	
+var transformedPayload = {
+	HealthCloudGA__SourceSystemId__c: Enub,
+	HealthCloudGA__MedicalRecordNumber__c: PID3_1 default "",
+	HealthCloudGA__Organization__c: MSH."MSH-04"."HD-01",
+	HealthCloudGA__SourceSystem__c: MSH."MSH-03"."HD-01",
+	All_Identifiers__c: PID3 default "",
+	Additional_Names__c: PID5 default "",
+	HealthCloudGA__BirthDate__c: PID."PID-07"."TS-01" as Date {format : "yyyyMMdd"},
+	HealthCloudGA__GenderCode__c: PID."PID-08",
+	Race__c: PID10 default "",
+	//Additional_Addresses__c: PID11 default "",
+	Additional_Telecom__c: PID13 default "",
+    Religion__c: PID17 default "",
+	Preferred_Communication__c: ZPD2 default "",
+	HealthCloudGA__Communication1Code__c: PID15 default "",
+	HealthCloudGA__MaritalStatusCode__c: PID16 default "",
+	SSN__c: PID19 default "",
+	Primary_Facility__c: PD13 default "",
+	Primary_Care_Provider__c: PD14 default "",
+	Handicaps__c: PD16 default "",
+	Gender_Identity__c: ZPD21 default "",
+	Insurance_Staging_Field__c: INS default "",
+	Next_of_Kin_Staging__c: NK1s default "",
+	Guarantor_Staging__c: GT1s default ""
+	//HealthCloudGA__SourceSystemModified__c: MSH."MSH-07"."TS-01" as LocalDateTime {format: "yyyyMMddHHmmss"},
+	//HealthCloudGA__Organization255__c: MSH."MSH-10"
+}	
+
+---
+[
+	transformedPayload ++ addresses ++ {"Additional_Addresses__c": Stringify::toString(overflowAddresses)}
+]
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<ee:transform doc:name="Transform Message" doc:id="c2cfc3e3-e091-4550-afdb-f6570a1187a0" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="DEBUG" doc:name="A28PostDataweave" doc:id="ce29cb2e-89b1-4ca9-87a6-4782dafe3b59" />
+	</sub-flow>
+</mule>
